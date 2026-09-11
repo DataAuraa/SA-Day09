@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 09: GenAI & LLM Engineering I — Official Student & Trainer Course Handbook</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    @media print {
+      @page {
+        size: A4;
+        margin: 15mm 15mm 20mm 15mm;
+      }
+      body {
+        background: white !important;
+        color: #111827 !important;
+        font-size: 11pt !important;
+        line-height: 1.5 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .page-break {
+        page-break-before: always;
+        break-before: page;
+      }
+      .avoid-break {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      a {
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen">
+
+  <!-- FLOATING CONTROL BAR (Hidden during printing) -->
+  <div class="no-print sticky top-0 z-50 bg-slate-900 text-white py-3 px-4 shadow-lg border-b border-slate-800 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-semibold transition">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Interactive Lab
+      </a>
+      <span class="text-xs text-slate-400 font-mono hidden sm:inline">| Day 09 Course Handbook (A4 Print-Ready)</span>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button onclick="window.print()" class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-rose-600 to-indigo-600 hover:from-rose-700 hover:to-indigo-700 text-white rounded-xl text-xs font-bold shadow-md transition transform active:scale-95">
+        <i data-lucide="printer" class="w-4 h-4"></i> Print / Save as PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN HANDBOOK DOCUMENT CONTAINER -->
+  <main class="max-w-4xl mx-auto my-8 p-8 sm:p-12 bg-white shadow-2xl rounded-2xl border border-slate-200 print:shadow-none print:border-none print:m-0 print:p-0">
+
+    <!-- COVER PAGE -->
+    <section class="min-h-[85vh] flex flex-col justify-between py-8 border-b-2 border-slate-900 mb-12">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-bold uppercase tracking-wider mb-8">
+          Saratha University &bull; Be Practical Training Courseware
+        </div>
+        
+        <div class="text-xs uppercase font-mono font-bold tracking-widest text-slate-400 mb-2">Phase III: GenAI & LLM Engineering I</div>
+        <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
+          Generative AI & LLM Fundamentals:
+          <span class="text-indigo-600 block mt-2">From Prompt Engineering to an AI HR Assistant</span>
+        </h1>
+        <p class="text-lg text-slate-600 max-w-2xl mt-4 leading-relaxed font-normal">
+          A comprehensive 5-hour technical handbook, lecture guide, code reference, and assessment rubric for undergraduate engineering and professional AI workshops.
+        </p>
+
+        <div class="mt-8 p-4 rounded-xl bg-slate-50 border-l-4 border-indigo-600 text-sm italic text-slate-700">
+          "Today's goal is not to learn how to chat with AI. The goal is to learn how to engineer an AI application."
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-slate-200 text-xs">
+        <div>
+          <span class="text-slate-400 uppercase font-bold block mb-1">Duration</span>
+          <span class="font-bold text-slate-800 text-sm">5 Hours</span>
+        </div>
+        <div>
+          <span class="text-slate-400 uppercase font-bold block mb-1">Technology</span>
+          <span class="font-bold text-slate-800 text-sm">Python + LLM API</span>
+        </div>
+        <div>
+          <span class="text-slate-400 uppercase font-bold block mb-1">Mini-Project</span>
+          <span class="font-bold text-slate-800 text-sm">AI HR Assistant</span>
+        </div>
+        <div>
+          <span class="text-slate-400 uppercase font-bold block mb-1">Assessment</span>
+          <span class="font-bold text-slate-800 text-sm">20-Mark Rubric</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABLE OF CONTENTS -->
+    <section class="page-break mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6 border-b pb-2">Table of Contents</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-xs">
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">01. Learning Objectives & Schedule</span><span class="font-mono text-slate-400">P. 2</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">02. End-to-End System Architecture</span><span class="font-mono text-slate-400">P. 2</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">03. Traditional AI vs Generative AI</span><span class="font-mono text-slate-400">P. 3</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">04. The AI &rarr; ML &rarr; DL &rarr; GenAI Hierarchy</span><span class="font-mono text-slate-400">P. 3</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">05. What is an LLM? Statistical Nature</span><span class="font-mono text-slate-400">P. 4</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">06. Transformers & Scaled Dot-Product Attention</span><span class="font-mono text-slate-400">P. 4</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">07. Tokens: Words vs Characters vs Subwords</span><span class="font-mono text-slate-400">P. 5</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">08. Context Window vs Long-Term Memory</span><span class="font-mono text-slate-400">P. 5</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">09. The 5-Part Prompt Engineering Formula</span><span class="font-mono text-slate-400">P. 6</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">10. Zero-Shot vs Few-Shot Exemplars</span><span class="font-mono text-slate-400">P. 6</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">11. Requesting Strict Machine-Readable JSON</span><span class="font-mono text-slate-400">P. 7</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">12. Hallucinations & 8-Point Defense</span><span class="font-mono text-slate-400">P. 7</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">13. Responsible AI & Recruitment Ethics</span><span class="font-mono text-slate-400">P. 8</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">14. Mini-Project: AI HR Assistant Specification</span><span class="font-mono text-slate-400">P. 8</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">15. Deterministic Python Set Math Operations</span><span class="font-mono text-slate-400">P. 9</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">16. Generic LLM API Request Protocols</span><span class="font-mono text-slate-400">P. 10</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">17. Practical Challenge Arena: Priya Sharma</span><span class="font-mono text-slate-400">P. 11</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">18. Official 20-Mark Evaluation Rubric</span><span class="font-mono text-slate-400">P. 11</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">19. Trainer Cheatsheet & Board Pipeline</span><span class="font-mono text-slate-400">P. 12</span></div>
+        <div class="flex justify-between py-1 border-b border-dotted"><span class="font-semibold">20. 15 Curated Interview Q&As</span><span class="font-mono text-slate-400">P. 13</span></div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 1 & 2: SCHEDULE & ARCHITECTURE -->
+    <section class="page-break mb-12 space-y-6">
+      <div class="border-b pb-2">
+        <span class="text-xs font-mono font-bold text-indigo-600 uppercase">Chapter 01</span>
+        <h2 class="text-2xl font-bold text-slate-900">5-Hour Schedule & System Architecture</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+        <div class="p-4 rounded-xl border bg-slate-50">
+          <h4 class="font-bold text-slate-900 text-sm mb-2">Morning Session (9:30 AM – 12:00 PM)</h4>
+          <p class="text-slate-600 mb-2">Focus: GenAI, LLMs, Transformers, Attention, Tokens, Context Windows & Foundational Prompting.</p>
+          <ul class="list-disc pl-4 space-y-1 text-slate-700">
+            <li>What is Generative AI vs Traditional Machine Learning</li>
+            <li>Transformers & Self-Attention mechanics</li>
+            <li>Characters &ne; Words &ne; Tokens</li>
+            <li>Context window limits vs persistent memory</li>
+          </ul>
+        </div>
+        <div class="p-4 rounded-xl border bg-slate-50">
+          <h4 class="font-bold text-slate-900 text-sm mb-2">Afternoon Session (1:00 PM – 3:30 PM)</h4>
+          <p class="text-slate-600 mb-2">Focus: LLM APIs, Structured Outputs, Deterministic Python Set Math, HR Mini Project & Ethics.</p>
+          <ul class="list-disc pl-4 space-y-1 text-slate-700">
+            <li>Zero-Shot and Few-Shot Prompt Design</li>
+            <li>Strict JSON schema enforcement for software</li>
+            <li>Python set intersections and match percentages</li>
+            <li>Hallucination prevention & Human-in-the-Loop ethics</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Architecture Pipeline Diagram -->
+      <div class="p-6 rounded-xl bg-slate-900 text-white font-mono text-xs avoid-break">
+        <div class="text-cyan-400 font-bold mb-3">// END-TO-END APPLICATION PIPELINE (Section 2 & 30)</div>
+        <pre class="leading-relaxed whitespace-pre-wrap">
+       [ Candidate Resume ] + [ Job Description ] (Unstructured Text)
+                              |
+                              v
+                      [ PROMPT ENGINE ]
+               (Role + Context + Constraints + Schema)
+                              |
+                              v
+                      [ LLM REASONING ]
+            (Entity Extraction + Question Generation)
+                              |
+                 +------------+------------+
+                 |                         |
+                 v                         v
+       [ Deterministic Python ]    [ Structured Output ]
+       Set Intersections & Gaps      Validated JSON Schema
+                 |                         |
+                 +------------+------------+
+                              |
+                              v
+                [ HUMAN HR RECRUITER REVIEW ]
+                 (Final Employment Decision)
+        </pre>
+      </div>
+    </section>
+
+    <!-- CHAPTER 3, 4 & 5: THEORY & TRANSFORMERS -->
+    <section class="page-break mb-12 space-y-6">
+      <div class="border-b pb-2">
+        <span class="text-xs font-mono font-bold text-indigo-600 uppercase">Chapter 02</span>
+        <h2 class="text-2xl font-bold text-slate-900">Foundational Concepts & Transformer Mechanics</h2>
+      </div>
+
+      <div class="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
+        <h3 class="font-bold text-base text-slate-900">Traditional AI vs Generative AI</h3>
+        <p>
+          Traditional AI/ML learns patterns from historical datasets to produce fixed classifications or numerical predictions (e.g., student marks &rarr; Pass/Fail, transaction &rarr; Fraud/Genuine). Generative AI can synthesize entirely novel artifacts based on user instructions and context—producing natural text, executable code, or structured JSON.
+        </p>
+
+        <h3 class="font-bold text-base text-slate-900 pt-2">Why Transformers Over RNNs?</h3>
+        <p>
+          Older recurrent architectures processed sequences sequentially token-by-token. Transformers process sequences concurrently using <strong>Self-Attention</strong>, capturing bidirectional dependencies across the entire sequence.
+        </p>
+
+        <!-- KaTeX Scaled Dot Product -->
+        <div class="p-4 rounded-xl bg-slate-50 border text-center font-serif text-base avoid-break">
+          $$ \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V $$
+          <p class="text-xs font-sans text-slate-500 mt-2">
+            <strong>Query (Q):</strong> What the token seeks &bull; <strong>Key (K):</strong> What other tokens offer &bull; <strong>Value (V):</strong> Information payload.
+          </p>
+        </div>
+
+        <h3 class="font-bold text-base text-slate-900 pt-2">Tokens & Context Windows</h3>
+        <p>
+          LLMs do not perceive words directly; text is decomposed into subword tokens. A token is approximately 4 characters or 0.75 English words. Tokens dictate API expenditure, processing latency, and maximum context utilization.
+        </p>
+      </div>
+    </section>
+
+    <!-- CHAPTER 6 & 7: PROMPT ENGINEERING & JSON -->
+    <section class="page-break mb-12 space-y-6">
+      <div class="border-b pb-2">
+        <span class="text-xs font-mono font-bold text-indigo-600 uppercase">Chapter 03</span>
+        <h2 class="text-2xl font-bold text-slate-900">Prompt Engineering & Structured Outputs</h2>
+      </div>
+
+      <div class="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
+        <h3 class="font-bold text-base text-slate-900">The 5-Part Enterprise Formula (Section 12)</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs font-mono avoid-break">
+          <div class="p-3 rounded bg-indigo-50 border border-indigo-200"><strong>ROLE:</strong> Persona ("AI HR Assistant")</div>
+          <div class="p-3 rounded bg-indigo-50 border border-indigo-200"><strong>TASK:</strong> Extraction & matching</div>
+          <div class="p-3 rounded bg-indigo-50 border border-indigo-200"><strong>CONTEXT:</strong> Candidate & JD text</div>
+          <div class="p-3 rounded bg-indigo-50 border border-indigo-200"><strong>CONSTRAINTS:</strong> "Do not invent info"</div>
+          <div class="p-3 rounded bg-indigo-50 border border-indigo-200"><strong>FORMAT:</strong> Strict valid JSON</div>
+        </div>
+
+        <h3 class="font-bold text-base text-slate-900 pt-2">Strict JSON Output Schema (Section 19 & 52)</h3>
+        <pre class="p-4 rounded-xl bg-slate-950 text-emerald-400 font-mono text-xs overflow-x-auto avoid-break">
+{
+  "candidate_name": "Rahul Kumar",
+  "technical_skills": ["Python", "SQL", "Pandas", "Scikit-learn", "Machine Learning", "Power BI"],
+  "experience_years": 2,
+  "matched_skills": ["Python", "SQL", "Pandas", "Scikit-learn", "Machine Learning", "Power BI"],
+  "missing_skills": ["Statistics"],
+  "recommended_roles": ["Data Scientist", "Data Analyst"],
+  "interview_questions": [
+    "Explain the difference between supervised and unsupervised machine learning.",
+    "How is Pandas used for data transformation?",
+    "How would you evaluate a classification model?"
+  ]
+}
+        </pre>
+      </div>
+    </section>
+
+    <!-- CHAPTER 8: CODE LISTINGS -->
+    <section class="page-break mb-12 space-y-6">
+      <div class="border-b pb-2">
+        <span class="text-xs font-mono font-bold text-indigo-600 uppercase">Chapter 04</span>
+        <h2 class="text-2xl font-bold text-slate-900">Complete Python Implementation Code</h2>
+      </div>
+
+      <div class="space-y-4 text-xs font-mono text-slate-800 avoid-break">
+        <h4 class="font-bold text-sm text-slate-900">Deterministic Skill Matching via Python Sets:</h4>
+        <pre class="p-4 rounded-xl bg-slate-100 border text-slate-900 overflow-x-auto">
+candidate_skills = {"Python", "SQL", "Pandas", "Machine Learning", "Power BI"}
+job_skills = {"Python", "SQL", "Pandas", "Machine Learning", "Scikit-learn", "Statistics", "Power BI"}
+
+# 1. Deterministic Set Operations (Zero Token Cost)
+matched = candidate_skills.intersection(job_skills)
+missing = job_skills.difference(candidate_skills)
+
+# 2. Percentage Overlap
+match_percentage = (len(matched) / len(job_skills)) * 100
+print(f"Matched Skills: {matched}")
+print(f"Missing Gaps:   {missing}")
+print(f"Match Score:    {match_percentage:.2f}%")
+        </pre>
+
+        <h4 class="font-bold text-sm text-slate-900 pt-2">Generic REST API Call & JSON Deserializer:</h4>
+        <pre class="p-4 rounded-xl bg-slate-100 border text-slate-900 overflow-x-auto">
+import os, requests, json
+
+headers = {
+    "Authorization": f"Bearer {os.getenv('LLM_API_KEY')}",
+    "Content-Type": "application/json"
+}
+payload = {
+    "model": "gpt-4o-mini",
+    "messages": [
+        {"role": "system", "content": "You are a deterministic AI HR Assistant."},
+        {"role": "user", "content": prompt}
+    ],
+    "response_format": {"type": "json_object"},
+    "temperature": 0.2
+}
+response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
+data = json.loads(response.json()["choices"][0]["message"]["content"])
+print("Candidate:", data["candidate_name"])
+        </pre>
+      </div>
+    </section>
+
+    <!-- CHAPTER 9: RUBRIC & INTERVIEW QUESTIONS -->
+    <section class="page-break mb-12 space-y-6">
+      <div class="border-b pb-2">
+        <span class="text-xs font-mono font-bold text-indigo-600 uppercase">Chapter 05</span>
+        <h2 class="text-2xl font-bold text-slate-900">20-Mark Assessment Rubric & Key Interview Q&As</h2>
+      </div>
+
+      <!-- Rubric Table -->
+      <div class="border rounded-xl overflow-hidden text-xs avoid-break">
+        <table class="w-full text-left divide-y">
+          <thead class="bg-slate-100 text-slate-700 font-bold">
+            <tr>
+              <th class="p-2.5">Grading Component</th>
+              <th class="p-2.5">Evaluation Focus</th>
+              <th class="p-2.5 text-right">Marks</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y text-slate-600">
+            <tr><td class="p-2.5 font-semibold">1. GenAI Concepts</td><td class="p-2.5">Explains tokens, context, and LLM statistical nature</td><td class="p-2.5 text-right font-bold">2 M</td></tr>
+            <tr><td class="p-2.5 font-semibold">2. Prompt Quality & Formula</td><td class="p-2.5">Correct usage of Role, Task, Context, Constraints, Format</td><td class="p-2.5 text-right font-bold">4 M</td></tr>
+            <tr><td class="p-2.5 font-semibold">3. Few-Shot Exemplars</td><td class="p-2.5">Provides clear demonstration input/output pairs</td><td class="p-2.5 text-right font-bold">2 M</td></tr>
+            <tr><td class="p-2.5 font-semibold">4. Structured JSON Output</td><td class="p-2.5">Valid strict schema syntax and null handling</td><td class="p-2.5 text-right font-bold">3 M</td></tr>
+            <tr><td class="p-2.5 font-semibold">5. Python Implementation</td><td class="p-2.5">Set intersection, difference & json.loads() parsing</td><td class="p-2.5 text-right font-bold">3 M</td></tr>
+            <tr><td class="p-2.5 font-semibold">6. Resume Analysis Precision</td><td class="p-2.5">Correctly extracts candidate skills without fabrication</td><td class="p-2.5 text-right font-bold">2 M</td></tr>
+            <tr><td class="p-2.5 font-semibold">7. Hallucination Awareness</td><td class="p-2.5">Explicit constraints prohibiting fabricated qualifications</td><td class="p-2.5 text-right font-bold">2 M</td></tr>
+            <tr><td class="p-2.5 font-semibold">8. Responsible AI Guardrails</td><td class="p-2.5">Human-in-the-loop clause; no autonomous auto-rejection</td><td class="p-2.5 text-right font-bold">2 M</td></tr>
+            <tr class="bg-slate-50 font-bold text-slate-900"><td class="p-2.5" colspan="2">TOTAL SCORE</td><td class="p-2.5 text-right">20 Marks</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Curated Interview Q&As -->
+      <div class="space-y-3 text-xs avoid-break pt-4">
+        <h4 class="font-bold text-sm text-slate-900">Key Interview Questions:</h4>
+        
+        <div class="p-3 rounded-lg bg-slate-50 border">
+          <strong class="text-slate-900">Q1. What is the fundamental difference between Traditional AI and Generative AI?</strong>
+          <p class="text-slate-600 mt-1">Traditional AI maps inputs to fixed historical categories (predictive/discriminative), whereas Generative AI synthesizes novel content (text, code, structured JSON) conditioned on prompt instructions.</p>
+        </div>
+
+        <div class="p-3 rounded-lg bg-slate-50 border">
+          <strong class="text-slate-900">Q2. Why should recruitment applications NEVER automatically reject candidates using an AI score?</strong>
+          <p class="text-slate-600 mt-1">Employment decisions carry severe legal and ethical ramifications. AI models can inherit historical bias, misinterpret non-standard resume formats, or hallucinate missing skills. AI must assist human HR recruiters, never replace them.</p>
+        </div>
+
+        <div class="p-3 rounded-lg bg-slate-50 border">
+          <strong class="text-slate-900">Q3. Why combine deterministic Python with an LLM rather than asking the LLM to do everything?</strong>
+          <p class="text-slate-600 mt-1">LLMs are probabilistic and unreliable at exact mathematics and strict set operations. Python executes set intersections and percentage scores with 100% precision at zero token cost, while the LLM excels at unstructured parsing and reasoning.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BACK COVER / SIGN-OFF -->
+    <footer class="pt-8 border-t text-center text-xs text-slate-400">
+      <p class="font-bold text-slate-700">Saratha University &bull; Be Practical Training</p>
+      <p>Phase III &bull; Generative AI & LLM Engineering I Courseware &bull; Day 09</p>
+    </footer>
+
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

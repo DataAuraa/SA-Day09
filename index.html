@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 09: GenAI & LLM Engineering I | Interactive Training Portal</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+              950: '#1e1b4b',
+            },
+            accent: {
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              rose: '#f43f5e',
+              violet: '#8b5cf6'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['Fira Code', 'JetBrains Mono', 'Menlo', 'Monaco', 'Courier New', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- TOP ANNOUNCEMENT / HERO BANNER -->
+  <div class="bg-gradient-to-r from-brand-900 via-brand-700 to-indigo-900 text-white text-xs sm:text-sm py-2 px-4 text-center font-medium flex items-center justify-between border-b border-indigo-500/20">
+    <div class="flex items-center gap-2 mx-auto">
+      <span class="bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-amber-400/30">Phase III</span>
+      <span>Generative AI & LLM Engineering I &bull; 5-Hour Intensive Workshop</span>
+      <span class="hidden md:inline text-indigo-200">| "From Prompt Engineering to an AI HR Assistant"</span>
+    </div>
+    <div class="hidden lg:flex items-center gap-3">
+      <a href="#trainer-mode" class="hover:underline flex items-center gap-1 text-xs text-indigo-200 hover:text-white">
+        <i data-lucide="presentation" class="w-3.5 h-3.5"></i> Trainer Cheatsheet
+      </a>
+      <a href="#interactive-lab" class="hover:underline flex items-center gap-1 text-xs text-amber-300 font-semibold">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Live HR Lab
+      </a>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-white/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-indigo-600 to-accent-cyan flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+          <i data-lucide="bot" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <span class="font-bold text-lg sm:text-xl tracking-tight bg-gradient-to-r from-brand-600 to-accent-violet dark:from-brand-400 dark:to-accent-cyan bg-clip-text text-transparent">
+            GenAI &bull; Day 09
+          </span>
+          <span class="hidden sm:block text-[11px] uppercase tracking-wider text-slate-400 font-semibold">LLM Engineering Portal</span>
+        </div>
+      </div>
+
+      <!-- Quick Nav Links -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-medium">
+        <a href="#overview" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-brand-400 dark:hover:bg-slate-800 transition">Overview</a>
+        <a href="#modules" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-brand-400 dark:hover:bg-slate-800 transition">Modules</a>
+        <a href="#interactive-lab" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-brand-400 dark:hover:bg-slate-800 transition flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Interactive Lab
+        </a>
+        <a href="#exercises" class="px-3 py-1.5 rounded-lg text-purple-600 dark:text-purple-400 font-semibold hover:bg-purple-50 dark:hover:bg-purple-950/40 transition">Exercises</a>
+        <a href="#prompt-engineering" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-brand-400 dark:hover:bg-slate-800 transition">Prompting</a>
+        <a href="#python-practical" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-brand-400 dark:hover:bg-slate-800 transition">Code</a>
+        <a href="#challenge" class="px-3 py-1.5 rounded-lg text-amber-600 dark:text-amber-400 font-semibold hover:bg-amber-50 dark:hover:bg-amber-950/40 transition">Challenge</a>
+        <a href="#qna" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-brand-400 dark:hover:bg-slate-800 transition">Q&A</a>
+      </nav>
+
+      <!-- Action Buttons (Search, Theme Toggle, Mobile Menu) -->
+      <div class="flex items-center gap-2">
+        <a href="handbook.html" target="_blank" class="hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/50 dark:hover:bg-rose-900/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 transition" title="View & Print Full Course Handbook as PDF">
+          <i data-lucide="file-down" class="w-3.5 h-3.5"></i> Export PDF
+        </a>
+        <button id="search-btn" class="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800" title="Quick Search (Ctrl+K)">
+          <i data-lucide="search" class="w-5 h-5"></i>
+        </button>
+        <button id="theme-toggle" class="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800" title="Toggle Theme">
+          <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+          <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-amber-400"></i>
+        </button>
+        <a href="#interactive-lab" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-xs font-semibold shadow transition transform active:scale-95">
+          <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i> Launch HR AI
+        </a>
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-1 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+      <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">01. Overview & Schedule</a>
+      <a href="#modules" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">02. Conceptual Modules</a>
+      <a href="#interactive-lab" class="block px-3 py-2 rounded-md text-base font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/30">03. Live AI HR Assistant Simulator</a>
+      <a href="#exercises" class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-950/30">04. 4 Interactive Labs & Exercises</a>
+      <a href="#prompt-engineering" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">05. Prompt Engineering & Formula</a>
+      <a href="#python-practical" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">06. Python Code & API Walkthrough</a>
+      <a href="#challenge" class="block px-3 py-2 rounded-md text-base font-medium text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/30">07. Practical Challenge & Rubric</a>
+      <a href="#trainer-mode" class="block px-3 py-2 rounded-md text-base font-medium text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-950/30">08. Trainer Cheatsheet & Board</a>
+      <a href="#qna" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">09. 15 Interview Questions</a>
+      <a href="handbook.html" target="_blank" class="block px-3 py-2 rounded-md text-base font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 font-bold">10. 📄 Export Full PDF Handbook</a>
+    </div>
+  </header>
+
+  <!-- SEARCH MODAL -->
+  <div id="search-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+      <div class="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3">
+        <i data-lucide="search" class="w-5 h-5 text-slate-400"></i>
+        <input id="search-input" type="text" placeholder="Search concepts (e.g., self-attention, tokens, prompt formula, JSON, rubric)..." class="w-full bg-transparent outline-none text-slate-900 dark:text-white placeholder-slate-400 text-sm">
+        <span class="text-xs text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">ESC</span>
+      </div>
+      <div id="search-results" class="max-h-80 overflow-y-auto p-3 space-y-1">
+        <!-- Dynamically populated -->
+        <div class="p-3 text-xs text-slate-400 text-center">Type any keyword above to jump straight to lessons, tools or python examples.</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="flex-grow">
+
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-24 border-b border-slate-200 dark:border-slate-800 bg-gradient-to-b from-brand-50/50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+      <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 dark:bg-brand-950/60 border border-brand-200 dark:border-brand-800 text-brand-700 dark:text-brand-300 text-xs font-semibold mb-4">
+            <i data-lucide="layers" class="w-3.5 h-3.5"></i> Day 09 &bull; Be Practical &bull; Saratha University Series
+          </div>
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
+            Generative AI & LLM Fundamentals:
+            <span class="bg-gradient-to-r from-brand-600 via-indigo-500 to-accent-cyan bg-clip-text text-transparent block mt-1">
+              From Prompt Engineering to an AI HR Assistant
+            </span>
+          </h1>
+          <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+            A comprehensive 5-hour interactive curriculum engineered for students and trainers. Journey from Transformer attention mechanisms and tokens into few-shot structured prompting and build a complete LLM-driven resume analysis application.
+          </p>
+
+          <!-- Key Tagline Quote Box -->
+          <div class="p-4 rounded-xl bg-gradient-to-r from-indigo-500/10 via-brand-500/10 to-cyan-500/10 border-l-4 border-brand-500 dark:border-brand-400 mb-8 backdrop-blur-sm">
+            <div class="flex items-start gap-3">
+              <i data-lucide="quote" class="w-5 h-5 text-brand-600 dark:text-brand-400 shrink-0 mt-0.5"></i>
+              <p class="text-sm font-medium text-slate-800 dark:text-slate-200 italic">
+                "Today's goal is not to learn how to chat with AI. The goal is to learn how to <strong>engineer an AI application</strong>."
+              </p>
+            </div>
+          </div>
+
+          <!-- Quick Action Badges -->
+          <div class="flex flex-wrap gap-3">
+            <a href="#interactive-lab" class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-semibold shadow-lg shadow-brand-500/25 transition transform hover:-translate-y-0.5">
+              <i data-lucide="cpu" class="w-4 h-4"></i> Explore Live AI HR Lab
+            </a>
+            <a href="#prompt-engineering" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 rounded-xl text-sm font-semibold shadow-sm transition">
+              <i data-lucide="sparkles" class="w-4 h-4 text-brand-500"></i> Prompt Sandbox
+            </a>
+            <a href="#trainer-mode" class="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-xl text-sm font-medium transition">
+              <i data-lucide="chalkboard" class="w-4 h-4 text-amber-500"></i> Trainer Cheatboard
+            </a>
+            <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-xl text-sm font-medium transition" title="Print/Export Handbook">
+              <i data-lucide="printer" class="w-4 h-4"></i> Export Notes
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Stat Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 pt-8 border-t border-slate-200/60 dark:border-slate-800">
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1">
+              <span>Duration</span>
+              <i data-lucide="clock" class="w-4 h-4 text-brand-500"></i>
+            </div>
+            <div class="text-2xl font-bold text-slate-900 dark:text-white">5 Hours</div>
+            <div class="text-xs text-slate-500 mt-0.5">Morning & Afternoon Sessions</div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1">
+              <span>Mini Project</span>
+              <i data-lucide="briefcase" class="w-4 h-4 text-emerald-500"></i>
+            </div>
+            <div class="text-2xl font-bold text-slate-900 dark:text-white">AI HR Assistant</div>
+            <div class="text-xs text-slate-500 mt-0.5">Resume & Job Matcher</div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1">
+              <span>Framework</span>
+              <i data-lucide="code-2" class="w-4 h-4 text-cyan-500"></i>
+            </div>
+            <div class="text-2xl font-bold text-slate-900 dark:text-white">Python + LLM API</div>
+            <div class="text-xs text-slate-500 mt-0.5">Deterministic + Generative</div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1">
+              <span>Assessment</span>
+              <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
+            </div>
+            <div class="text-2xl font-bold text-slate-900 dark:text-white">20 Marks</div>
+            <div class="text-xs text-slate-500 mt-0.5">Structured Evaluation Rubric</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 1: OVERVIEW & SCHEDULE -->
+    <section id="overview" class="py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Roadmap & Agenda</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Day 09 Schedule & Learning Outcomes</h2>
+        </div>
+        <div class="text-xs text-slate-500 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 self-start md:self-auto">
+          Phase III &bull; GenAI & LLM Engineering I
+        </div>
+      </div>
+
+      <!-- Schedule Table Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        
+        <!-- Card 1: Morning -->
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-sm relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300">Morning Session</span>
+            <span class="text-xs font-mono text-slate-500">9:30 AM – 12:00 PM</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Core Foundations & Architecture</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 mb-4">
+            Transitioning from Traditional ML to GenAI. Deep dive into Transformers, self-attention, token representations, context windows, and foundational prompt engineering.
+          </p>
+          <ul class="text-xs space-y-2 text-slate-700 dark:text-slate-300">
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-blue-500"></i> Traditional AI vs Generative AI</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-blue-500"></i> Transformer Flow & Self-Attention</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-blue-500"></i> Characters vs Words vs Tokens</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-blue-500"></i> Context Window != Long-term Memory</li>
+          </ul>
+        </div>
+
+        <!-- Card 2: Afternoon -->
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-sm relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-500 to-indigo-500"></div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300">Afternoon Session</span>
+            <span class="text-xs font-mono text-slate-500">1:00 PM – 3:30 PM</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">API Integration & Structured Output</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 mb-4">
+            Zero-shot vs Few-shot prompts, requesting strict JSON outputs for software integration, Python set operations, and Responsible AI guardrails.
+          </p>
+          <ul class="text-xs space-y-2 text-slate-700 dark:text-slate-300">
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500"></i> LLM API Anatomy & Request Pipelines</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500"></i> Structured JSON for Software Consumption</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500"></i> Deterministic Python + Generative LLM</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500"></i> Hallucination Reduction Checklist</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: Challenge -->
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-sm relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 to-rose-500"></div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">Practical Assessment</span>
+            <span class="text-xs font-mono text-slate-500">30–45 min</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Prompt Challenge & Project</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 mb-4">
+            Build and optimize the AI HR Resume Analyzer for candidate Priya Sharma against the Data Scientist job specification with 20-mark evaluation.
+          </p>
+          <ul class="text-xs space-y-2 text-slate-700 dark:text-slate-300">
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-amber-500"></i> 5-Part Prompt Formula Application</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-amber-500"></i> Hallucination Resistance Verification</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-amber-500"></i> Strict JSON Schema Compliance</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-amber-500"></i> Human-in-the-loop Guardrail Review</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- LEARNING OBJECTIVES CHECKLIST -->
+      <div class="rounded-2xl bg-slate-100/70 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-6">
+        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+          <i data-lucide="target" class="w-5 h-5 text-brand-600 dark:text-brand-400"></i>
+          10 Core Learning Objectives Checklist
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3" id="objectives-container">
+          <!-- Populated with checkboxes -->
+          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 cursor-pointer hover:border-brand-400 transition">
+            <input type="checkbox" checked class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
+            <span class="text-xs text-slate-700 dark:text-slate-300 font-medium">Explain GenAI vs Traditional ML</span>
+          </label>
+          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 cursor-pointer hover:border-brand-400 transition">
+            <input type="checkbox" checked class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
+            <span class="text-xs text-slate-700 dark:text-slate-300 font-medium">Understand Transformer & Attention</span>
+          </label>
+          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 cursor-pointer hover:border-brand-400 transition">
+            <input type="checkbox" checked class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
+            <span class="text-xs text-slate-700 dark:text-slate-300 font-medium">Explain Tokens vs Words</span>
+          </label>
+          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 cursor-pointer hover:border-brand-400 transition">
+            <input type="checkbox" checked class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
+            <span class="text-xs text-slate-700 dark:text-slate-300 font-medium">Master Context Window Limits</span>
+          </label>
+          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 cursor-pointer hover:border-brand-400 transition">
+            <input type="checkbox" checked class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
+            <span class="text-xs text-slate-700 dark:text-slate-300 font-medium">5-Part Prompt Formula</span>
+          </label>
+          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 cursor-pointer hover:border-brand-400 transition">
+            <input type="checkbox" checked class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
+            <span class="text-xs text-slate-700 dark:text-slate-300 font-medium">Zero-Shot & Few-Shot Prompting</span>
+          </label>
+          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 cursor-pointer hover:border-brand-400 transition">
+            <input type="checkbox" checked class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
+            <span class="text-xs text-slate-700 dark:text-slate-300 font-medium">Request Strict JSON Outputs</span>
+          </label>
+          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 cursor-pointer hover:border-brand-400 transition">
+            <input type="checkbox" checked class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
+            <span class="text-xs text-slate-700 dark:text-slate-300 font-medium">Understand LLM API Requests</span>
+          </label>
+          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 cursor-pointer hover:border-brand-400 transition">
+            <input type="checkbox" checked class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
+            <span class="text-xs text-slate-700 dark:text-slate-300 font-medium">Identify & Reduce Hallucinations</span>
+          </label>
+          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 cursor-pointer hover:border-brand-400 transition">
+            <input type="checkbox" checked class="mt-0.5 rounded text-brand-600 focus:ring-brand-500">
+            <span class="text-xs text-slate-700 dark:text-slate-300 font-medium">Build Mini AI HR Assistant</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE FLOW VISUALIZER -->
+    <section class="py-12 bg-slate-900 text-white border-y border-slate-800 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-8">
+          <span class="text-xs font-bold text-accent-cyan uppercase tracking-wider">System Pipeline</span>
+          <h2 class="text-2xl sm:text-3xl font-bold mt-1">End-to-End Day 09 Application Flow</h2>
+          <p class="text-xs text-slate-400 mt-2">
+            The board architecture connecting unstructured input files through deterministic logic and LLM reasoning into structured HR insights.
+          </p>
+        </div>
+
+        <!-- Interactive Architecture Diagram -->
+        <div class="flex flex-col lg:flex-row items-stretch justify-center gap-3 relative py-4">
+          
+          <!-- Step 1 -->
+          <div class="flex-1 bg-slate-800/80 rounded-xl p-4 border border-slate-700/70 hover:border-brand-500 transition shadow-lg text-center flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 mx-auto flex items-center justify-center mb-2 font-bold text-xs">1</div>
+              <h4 class="font-bold text-sm text-white">Unstructured Input</h4>
+              <p class="text-xs text-slate-300 mt-1">Candidate Resume + Target Job Description (PDF / Raw Text)</p>
+            </div>
+            <div class="mt-3 py-1 bg-slate-900/60 rounded text-[11px] font-mono text-cyan-300">Rahul Kumar, 2 yrs</div>
+          </div>
+
+          <div class="hidden lg:flex items-center text-slate-500"><i data-lucide="arrow-right" class="w-5 h-5"></i></div>
+
+          <!-- Step 2 -->
+          <div class="flex-1 bg-slate-800/80 rounded-xl p-4 border border-slate-700/70 hover:border-brand-500 transition shadow-lg text-center flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 mx-auto flex items-center justify-center mb-2 font-bold text-xs">2</div>
+              <h4 class="font-bold text-sm text-white">Prompt Engine</h4>
+              <p class="text-xs text-slate-300 mt-1">Injects Role, Constraints, Candidate Context & Strict Schema</p>
+            </div>
+            <div class="mt-3 py-1 bg-slate-900/60 rounded text-[11px] font-mono text-indigo-300">5-Part Formula</div>
+          </div>
+
+          <div class="hidden lg:flex items-center text-slate-500"><i data-lucide="arrow-right" class="w-5 h-5"></i></div>
+
+          <!-- Step 3 -->
+          <div class="flex-1 bg-slate-800/80 rounded-xl p-4 border border-slate-700/70 hover:border-brand-500 transition shadow-lg text-center flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 mx-auto flex items-center justify-center mb-2 font-bold text-xs">3</div>
+              <h4 class="font-bold text-sm text-white">LLM / Transformer</h4>
+              <p class="text-xs text-slate-300 mt-1">Attention-driven entity extraction & qualitative reasoning</p>
+            </div>
+            <div class="mt-3 py-1 bg-slate-900/60 rounded text-[11px] font-mono text-purple-300">Attention + FFN</div>
+          </div>
+
+          <div class="hidden lg:flex items-center text-slate-500"><i data-lucide="arrow-right" class="w-5 h-5"></i></div>
+
+          <!-- Step 4 -->
+          <div class="flex-1 bg-slate-800/80 rounded-xl p-4 border border-slate-700/70 hover:border-brand-500 transition shadow-lg text-center flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center mb-2 font-bold text-xs">4</div>
+              <h4 class="font-bold text-sm text-white">Deterministic Match</h4>
+              <p class="text-xs text-slate-300 mt-1">Python Sets: Matched, Missing Skills & Score %</p>
+            </div>
+            <div class="mt-3 py-1 bg-slate-900/60 rounded text-[11px] font-mono text-emerald-300">Set Intersection</div>
+          </div>
+
+          <div class="hidden lg:flex items-center text-slate-500"><i data-lucide="arrow-right" class="w-5 h-5"></i></div>
+
+          <!-- Step 5 -->
+          <div class="flex-1 bg-slate-800/80 rounded-xl p-4 border border-slate-700/70 hover:border-brand-500 transition shadow-lg text-center flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 mx-auto flex items-center justify-center mb-2 font-bold text-xs">5</div>
+              <h4 class="font-bold text-sm text-white">Structured Output</h4>
+              <p class="text-xs text-slate-300 mt-1">Validated JSON consumed by HR Dashboard + Human Review</p>
+            </div>
+            <div class="mt-3 py-1 bg-slate-900/60 rounded text-[11px] font-mono text-amber-300">json.loads(response)</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE TABS: CORE CONCEPTS -->
+    <section id="modules" class="py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Conceptual Modules</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Core Theory & Fundamentals</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          Click through each module to explore interactive explanations, visual diagrams, and student analogies.
+        </p>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="flex items-center justify-start sm:justify-center overflow-x-auto space-x-2 border-b border-slate-200 dark:border-slate-800 pb-3 mb-8 no-scrollbar">
+        <button class="module-tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition" data-target="mod-genai">
+          1. Traditional AI vs GenAI
+        </button>
+        <button class="module-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition" data-target="mod-llm">
+          2. What is an LLM?
+        </button>
+        <button class="module-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition" data-target="mod-transformer">
+          3. Transformers & Self-Attention
+        </button>
+        <button class="module-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition" data-target="mod-tokens">
+          4. Tokens & Context Window
+        </button>
+        <button class="module-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition" data-target="mod-ethics">
+          5. Hallucination & Ethics
+        </button>
+      </div>
+
+      <!-- TAB PANELS -->
+      <div class="space-y-6">
+
+        <!-- PANEL 1: TRADITIONAL AI VS GENAI -->
+        <div id="mod-genai" class="module-content-panel block">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            
+            <div class="space-y-4">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 text-xs font-semibold">
+                Module 1: The Paradigm Shift
+              </div>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Traditional AI Learns to Predict. GenAI Learns to Create.</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                Traditional Machine Learning models learn mathematical mappings from historical structured datasets to produce a deterministic prediction or label (e.g., student marks &rarr; Pass/Fail, email &rarr; Spam/Not Spam, credit card transaction &rarr; Fraud/Genuine).
+              </p>
+              <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                In contrast, <strong>Generative AI</strong> can synthesize entirely novel artifacts based on user instructions and patterns learned from vast corpuses—generating original text, executable code, synthesized audio, photorealistic graphics, or structured JSON.
+              </p>
+
+              <!-- Hierarchy Tree Box -->
+              <div class="p-4 rounded-xl bg-slate-900 text-slate-200 font-mono text-xs overflow-x-auto border border-slate-800">
+                <div class="text-brand-400 font-semibold mb-1">// The AI Hierarchy (Section 6)</div>
+                <div class="text-slate-300">ARTIFICIAL INTELLIGENCE</div>
+                <div class="pl-4 text-slate-400">&boxur; Rule-Based AI / Expert Systems</div>
+                <div class="pl-4 text-slate-300">&boxvr; MACHINE LEARNING</div>
+                <div class="pl-8 text-slate-300">&boxvr; DEEP LEARNING (Neural Networks)</div>
+                <div class="pl-12 text-emerald-400 font-semibold">&boxvr; GENERATIVE AI</div>
+                <div class="pl-16 text-cyan-300 font-semibold">&boxvr; LLMs (Text, Code, Reasoning)</div>
+                <div class="pl-16 text-slate-400">&boxur; Diffusion Models (Image, Video, Audio)</div>
+              </div>
+            </div>
+
+            <!-- Comparison Visual Matrix -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Traditional Card -->
+              <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-3">
+                    <i data-lucide="binary" class="w-4 h-4"></i>
+                  </div>
+                  <h4 class="font-bold text-slate-900 dark:text-white text-base">Traditional AI / ML</h4>
+                  <span class="text-[11px] font-mono text-blue-500 dark:text-blue-400 block mb-2">Predictive & Classification</span>
+                  <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-2">
+                    <li class="flex items-start gap-1.5"><i data-lucide="arrow-right" class="w-3.5 h-3.5 text-blue-500 shrink-0 mt-0.5"></i> Maps inputs directly to historical labels</li>
+                    <li class="flex items-start gap-1.5"><i data-lucide="arrow-right" class="w-3.5 h-3.5 text-blue-500 shrink-0 mt-0.5"></i> Examples: Spam filter, loan default prediction</li>
+                    <li class="flex items-start gap-1.5"><i data-lucide="arrow-right" class="w-3.5 h-3.5 text-blue-500 shrink-0 mt-0.5"></i> Output: Fixed categories, probabilities, or numerical values</li>
+                  </ul>
+                </div>
+                <div class="mt-4 p-2 bg-slate-100 dark:bg-slate-800 rounded text-center text-xs font-mono text-slate-700 dark:text-slate-300">
+                  Marks &rarr; Pass / Fail
+                </div>
+              </div>
+
+              <!-- GenAI Card -->
+              <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-brand-500/40 dark:border-brand-500/50 shadow-md flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute top-2 right-2 px-2 py-0.5 bg-brand-500 text-white rounded text-[10px] font-bold">TODAY</div>
+                <div>
+                  <div class="w-8 h-8 rounded-lg bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 flex items-center justify-center mb-3">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                  </div>
+                  <h4 class="font-bold text-slate-900 dark:text-white text-base">Generative AI</h4>
+                  <span class="text-[11px] font-mono text-brand-500 dark:text-brand-400 block mb-2">Content Synthesis</span>
+                  <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-2">
+                    <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i> Synthesizes new sequences conditioned on prompts</li>
+                    <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i> Examples: Code assistants, resume analyzers, chat</li>
+                    <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i> Output: Rich prose, code, questions, JSON objects</li>
+                  </ul>
+                </div>
+                <div class="mt-4 p-2 bg-brand-50 dark:bg-brand-950/60 rounded text-center text-xs font-mono text-brand-700 dark:text-brand-300">
+                  Prompt &rarr; Resume Insights & Questions
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PANEL 2: WHAT IS AN LLM? -->
+        <div id="mod-llm" class="module-content-panel hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div class="space-y-4">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs font-semibold">
+                Module 2: Large Language Models
+              </div>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">A General-Purpose Statistical Language Engine</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                An LLM is a deep neural network trained on massive datasets of text and code to learn statistical patterns in language and generate coherent completions based on input context.
+              </p>
+              
+              <!-- Crucial Student Misconception Warning -->
+              <div class="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800">
+                <div class="flex items-start gap-3">
+                  <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5"></i>
+                  <div class="text-xs text-amber-900 dark:text-amber-200 space-y-1">
+                    <strong class="font-bold block text-sm">Critical Distinction: LLM != "Human Brain"</strong>
+                    <p>
+                      Students often assume ChatGPT possesses conscious reasoning or omniscience. Remind them: An LLM processes tokens via matrix multiplications, computes attention weights, and samples probable token continuations. <em>Fluent language does NOT guarantee factual accuracy!</em>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Traditional NLP vs Unified LLM -->
+              <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Why LLMs Changed the Industry</h4>
+                <p class="text-xs text-slate-600 dark:text-slate-400">
+                  Previously, companies required separate isolated models for Sentiment, Translation, Entity Extraction, and Summarization. One LLM performs all four via distinct prompt instructions!
+                </p>
+              </div>
+            </div>
+
+            <!-- Interactive Token Completion Simulation -->
+            <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+              <h4 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
+                <i data-lucide="terminal" class="w-4 h-4 text-brand-500"></i>
+                Statistical Continuation Sandbox
+              </h4>
+              <p class="text-xs text-slate-500">
+                LLMs predict the most statistically probable next token based on learned representations:
+              </p>
+
+              <div class="space-y-3">
+                <div class="p-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono text-slate-700 dark:text-slate-300">
+                  <span class="text-slate-400">Prompt:</span> "Python is a programming ______"
+                  <div class="mt-2 text-emerald-600 dark:text-emerald-400 font-bold">&rarr; "language" (Probability: 94.8%)</div>
+                </div>
+
+                <div class="p-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono text-slate-700 dark:text-slate-300">
+                  <span class="text-slate-400">Complex Prompt:</span> "Extract technical skills from: Python developer with 3 years experience in Pandas, SQL and ML"
+                  <div class="mt-2 text-brand-600 dark:text-brand-400 font-bold">&rarr; ["Python", "Pandas", "SQL", "Machine Learning"]</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PANEL 3: TRANSFORMER ARCHITECTURE & ATTENTION -->
+        <div id="mod-transformer" class="module-content-panel hidden">
+          <div class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 text-xs font-semibold">
+                  Module 3: Transformer Engine & Self-Attention
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">Why Transformers Revolutionized AI</h3>
+              </div>
+              <div class="text-xs text-slate-500 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
+                Vaswani et al. (2017) "Attention Is All You Need"
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="space-y-4">
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Older sequence architectures like <strong>RNNs (Recurrent Neural Networks)</strong> processed sentences strictly token-by-token (Word 1 &rarr; Word 2 &rarr; Word 3). As sequences grew, earlier context was forgotten, and parallelization on modern GPUs was impossible.
+                </p>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <strong>Transformers</strong> process entire sequences simultaneously, computing pairwise dynamic relationship weights via <strong>Self-Attention</strong>. Each token attends to all other tokens to construct context-aware contextual embeddings.
+                </p>
+
+                <!-- Equation Box with KaTeX -->
+                <div class="p-4 rounded-xl bg-slate-900 text-white border border-slate-800 space-y-2">
+                  <span class="text-xs font-mono text-purple-300 font-semibold uppercase tracking-wider block">Scaled Dot-Product Attention Formula</span>
+                  <div class="text-center py-2 text-sm sm:text-base font-serif" id="math-attention">
+                    $$ \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V $$
+                  </div>
+                  <p class="text-[11px] text-slate-400">
+                    <strong>Query (Q):</strong> What the current token is seeking &bull; 
+                    <strong>Key (K):</strong> What other tokens offer &bull; 
+                    <strong>Value (V):</strong> The actual token representations weighted by attention score.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Interactive Attention Demo -->
+              <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                <h4 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
+                  <i data-lucide="eye" class="w-4 h-4 text-purple-500"></i>
+                  Interactive Self-Attention Resolving
+                </h4>
+                <p class="text-xs text-slate-500">
+                  Click on the pronoun <code class="text-purple-600 dark:text-purple-400 font-bold">"she"</code> to inspect attention weights:
+                </p>
+
+                <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800 text-sm font-medium flex flex-wrap gap-2 items-center" id="attention-sentence">
+                  <span class="token-word p-1.5 rounded cursor-pointer transition hover:bg-slate-200 dark:hover:bg-slate-700" data-token="Anjali">Anjali</span>
+                  <span class="token-word p-1.5 rounded cursor-pointer transition hover:bg-slate-200 dark:hover:bg-slate-700" data-token="submitted">submitted</span>
+                  <span class="token-word p-1.5 rounded cursor-pointer transition hover:bg-slate-200 dark:hover:bg-slate-700" data-token="her">her</span>
+                  <span class="token-word p-1.5 rounded cursor-pointer transition hover:bg-slate-200 dark:hover:bg-slate-700" data-token="resume">resume</span>
+                  <span class="token-word p-1.5 rounded cursor-pointer transition hover:bg-slate-200 dark:hover:bg-slate-700" data-token="because">because</span>
+                  <span class="token-word p-1.5 rounded bg-purple-600 text-white shadow-md font-bold cursor-pointer" id="she-token" data-token="she">she</span>
+                  <span class="token-word p-1.5 rounded cursor-pointer transition hover:bg-slate-200 dark:hover:bg-slate-700" data-token="wanted">wanted</span>
+                  <span class="token-word p-1.5 rounded cursor-pointer transition hover:bg-slate-200 dark:hover:bg-slate-700" data-token="a">a</span>
+                  <span class="token-word p-1.5 rounded cursor-pointer transition hover:bg-slate-200 dark:hover:bg-slate-700" data-token="job">job.</span>
+                </div>
+
+                <!-- Live Attention Heatmap Bars -->
+                <div class="space-y-2 pt-2" id="attention-bars">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="font-mono text-purple-700 dark:text-purple-300 font-semibold">she &rarr; Anjali</span>
+                    <span class="font-mono text-purple-600 font-bold">0.86 (Highest Attention)</span>
+                  </div>
+                  <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                    <div class="bg-purple-600 h-full rounded-full transition-all duration-500" style="width: 86%;"></div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-xs pt-1">
+                    <span class="font-mono text-slate-500">she &rarr; resume</span>
+                    <span class="font-mono text-slate-400">0.08</span>
+                  </div>
+                  <div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                    <div class="bg-slate-400 h-full rounded-full" style="width: 8%;"></div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-xs pt-1">
+                    <span class="font-mono text-slate-500">she &rarr; job</span>
+                    <span class="font-mono text-slate-400">0.06</span>
+                  </div>
+                  <div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                    <div class="bg-slate-400 h-full rounded-full" style="width: 6%;"></div>
+                  </div>
+                </div>
+
+                <div class="p-3 rounded-lg bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 text-xs text-purple-900 dark:text-purple-200">
+                  <strong>Trainer Takeaway:</strong> Self-attention allows each token to consider all tokens in the same sequence, determining who "she" refers to without handcrafted grammatical rules.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 4: TOKENS & CONTEXT WINDOW -->
+        <div id="mod-tokens" class="module-content-panel hidden">
+          <div class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 text-xs font-semibold">
+                  Module 4: Tokens & The Context Window
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">Characters &ne; Words &ne; Tokens</h3>
+              </div>
+              <div class="text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1.5 rounded-lg border border-emerald-200 dark:border-emerald-800">
+                Rule of Thumb: 1 token &approx; 4 characters (&approx; 0.75 words) in English
+              </div>
+            </div>
+
+            <!-- Interactive Tokenizer Playground -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              
+              <!-- Left: Inputs -->
+              <div class="lg:col-span-7 space-y-4 p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div class="flex items-center justify-between">
+                  <label class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                    <i data-lucide="cpu" class="w-4 h-4 text-emerald-500"></i> Real-Time Subword Tokenizer
+                  </label>
+                  <button id="reset-token-sample" class="text-xs text-brand-600 dark:text-brand-400 hover:underline">Reset Sample</button>
+                </div>
+
+                <textarea id="tokenizer-input" rows="4" class="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-mono focus:ring-2 focus:ring-emerald-500 outline-none resize-y" placeholder="Type or paste any text to see token splits...">Artificial Intelligence with Transformers is unbelievable.</textarea>
+
+                <div class="flex flex-wrap gap-2 text-xs">
+                  <button class="sample-tok-btn px-2.5 py-1 bg-slate-100 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 hover:border-emerald-500" data-text="Rahul Kumar, B.Tech Computer Science with 2 years experience in Python and SQL.">
+                    Resume Sample
+                  </button>
+                  <button class="sample-tok-btn px-2.5 py-1 bg-slate-100 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 hover:border-emerald-500" data-text="unbelievable antidisestablishmentarianism 123456789">
+                    Subword Splits
+                  </button>
+                  <button class="sample-tok-btn px-2.5 py-1 bg-slate-100 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 hover:border-emerald-500" data-text="def analyze_resume(resume_text: str) -> dict:">
+                    Python Code
+                  </button>
+                </div>
+
+                <!-- Visual Token Pills Display -->
+                <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+                  <div class="text-xs font-bold uppercase text-slate-400 mb-2">Tokenized Chunks:</div>
+                  <div id="token-pills-container" class="flex flex-wrap gap-1.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 min-h-[70px]">
+                    <!-- Injected by JS -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Metrics & Context Window Anatomy -->
+              <div class="lg:col-span-5 space-y-4">
+                
+                <!-- Metrics Card -->
+                <div class="grid grid-cols-3 gap-3">
+                  <div class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center">
+                    <span class="text-[11px] font-semibold text-slate-400 uppercase block">Characters</span>
+                    <span id="stat-chars" class="text-xl font-extrabold text-slate-900 dark:text-white">56</span>
+                  </div>
+                  <div class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center">
+                    <span class="text-[11px] font-semibold text-slate-400 uppercase block">Words</span>
+                    <span id="stat-words" class="text-xl font-extrabold text-slate-900 dark:text-white">6</span>
+                  </div>
+                  <div class="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-center">
+                    <span class="text-[11px] font-semibold text-emerald-700 dark:text-emerald-300 uppercase block">Tokens</span>
+                    <span id="stat-tokens" class="text-xl font-extrabold text-emerald-600 dark:text-emerald-400">9</span>
+                  </div>
+                </div>
+
+                <!-- Context Window Explainer -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+                  <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                    <i data-lucide="box" class="w-4 h-4 text-emerald-500"></i> Context Window != Long-Term Memory
+                  </h4>
+                  <p class="text-xs text-slate-600 dark:text-slate-400">
+                    The context window is the finite token envelope an LLM holds simultaneously for a single request:
+                  </p>
+                  
+                  <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800 text-[11px] font-mono space-y-1 text-slate-700 dark:text-slate-300">
+                    <div class="text-brand-500 font-semibold">[ System Instructions ] +</div>
+                    <div class="text-blue-500">[ User Prompt ] +</div>
+                    <div class="text-emerald-500">[ Full Candidate Resume ] +</div>
+                    <div class="text-purple-500">[ Job Description ] +</div>
+                    <div class="text-amber-500">[ Output Tokens Requested ]</div>
+                    <div class="pt-1 border-t border-slate-300 dark:border-slate-700 font-bold text-slate-900 dark:text-white">
+                      = Total Context Utilization (Must fit limit!)
+                    </div>
+                  </div>
+
+                  <div class="p-2.5 rounded bg-amber-50 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 text-[11px]">
+                    <strong>Why it matters for HR:</strong> A 20-page resume booklet with 10 past projects will consume high tokens, increasing API costs and latency.
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 5: HALLUCINATIONS & RESPONSIBLE AI -->
+        <div id="mod-ethics" class="module-content-panel hidden">
+          <div class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 text-xs font-semibold">
+                  Module 5: Responsible AI & Hallucination Mitigation
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">High-Impact Decisions Require Human Oversight</h3>
+              </div>
+              <div class="text-xs text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/50 px-3 py-1.5 rounded-lg border border-rose-200 dark:border-rose-800">
+                Golden Rule: AI Assists, Humans Decide
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              
+              <!-- Hallucination Anatomy -->
+              <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                <h4 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                  <i data-lucide="ghost" class="w-4 h-4 text-rose-500"></i> What is Hallucination?
+                </h4>
+                <p class="text-xs text-slate-600 dark:text-slate-400">
+                  Hallucination occurs when an AI generates confident, plausible-sounding claims that are completely unsupported by the provided document.
+                </p>
+
+                <!-- Example Comparison -->
+                <div class="space-y-3">
+                  <div class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs space-y-1">
+                    <span class="font-bold text-slate-700 dark:text-slate-300">Resume states:</span>
+                    <p class="font-mono text-slate-600 dark:text-slate-400">"Python, SQL, Pandas. 1 year as Junior Analyst."</p>
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-xs space-y-1">
+                    <div class="flex items-center gap-1.5 text-rose-600 dark:text-rose-400 font-bold">
+                      <i data-lucide="x-circle" class="w-4 h-4"></i> Hallucinated Response (Severe Risk)
+                    </div>
+                    <p class="text-rose-800 dark:text-rose-300">
+                      "The candidate is an expert AWS Cloud Architect with 5 years leading Kubernetes deployments." &larr; <em>Fabricated!</em>
+                    </p>
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-xs space-y-1">
+                    <div class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-bold">
+                      <i data-lucide="check-circle" class="w-4 h-4"></i> Evidence-Based Grounded Response
+                    </div>
+                    <p class="text-emerald-800 dark:text-emerald-300">
+                      "Cloud experience is not mentioned in the provided resume. Matched skills: Python, SQL, Pandas."
+                    </p>
+                  </div>
+                </div>
+
+                <!-- 8-Point Reduction Checklist -->
+                <div class="pt-3 border-t border-slate-200 dark:border-slate-800">
+                  <h5 class="text-xs font-bold uppercase text-slate-400 mb-2">Trainer Checklist: 8 Ways to Reduce Hallucinations</h5>
+                  <div class="grid grid-cols-2 gap-1.5 text-[11px] text-slate-700 dark:text-slate-300">
+                    <div class="flex items-center gap-1"><i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> Restrict context source</div>
+                    <div class="flex items-center gap-1"><i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> "Do not invent info" rule</div>
+                    <div class="flex items-center gap-1"><i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> Require explicit quotes</div>
+                    <div class="flex items-center gap-1"><i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> Enforce JSON schemas</div>
+                    <div class="flex items-center gap-1"><i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> Fallback to null/empty</div>
+                    <div class="flex items-center gap-1"><i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> Use deterministic code for math</div>
+                    <div class="flex items-center gap-1"><i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> Synthetic test resumes</div>
+                    <div class="flex items-center gap-1"><i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> Final human approval</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Responsible AI Recruitment Framework -->
+              <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                <h4 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                  <i data-lucide="shield-alert" class="w-4 h-4 text-brand-500"></i> Recruitment Ethics & Compliance
+                </h4>
+                
+                <div class="space-y-3 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <div class="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800">
+                    <strong class="text-amber-900 dark:text-amber-200 font-bold block mb-1">Never Build: AI &rarr; Automatically Reject Candidate</strong>
+                    <p>
+                      Automated rejection systems risk unlawful demographic bias, proxy discrimination, and false negative skill extractions.
+                    </p>
+                  </div>
+
+                  <!-- The Ethical HR Pipeline -->
+                  <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center space-y-2">
+                    <div class="font-bold text-xs uppercase text-slate-400">The Approved Enterprise Pattern</div>
+                    <div class="flex flex-col items-center gap-1.5 font-mono text-[11px]">
+                      <span class="px-2 py-1 bg-white dark:bg-slate-900 rounded border text-slate-800 dark:text-slate-200">Candidate Resume</span>
+                      <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-slate-400"></i>
+                      <span class="px-2 py-1 bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300 rounded border border-brand-300 dark:border-brand-800">AI Synthesizes Skill Overlap & Gaps</span>
+                      <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-slate-400"></i>
+                      <span class="px-2 py-1 bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 rounded border border-purple-300 dark:border-purple-800">Presents Evidence & Interview Questions</span>
+                      <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-slate-400"></i>
+                      <span class="px-3 py-1.5 bg-emerald-600 text-white font-bold rounded shadow-md">Human HR Recruiter Makes Final Decision</span>
+                    </div>
+                  </div>
+
+                  <p class="text-[11px] text-slate-500">
+                    <strong>Privacy Note:</strong> Resumes contain Personally Identifiable Information (PII) like phone numbers and addresses. Always sanitize or use synthetic mock profiles in public AI notebooks.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROMPT ENGINEERING FRAMEWORK & INTERACTIVE SANDBOX -->
+    <section id="prompt-engineering" class="py-14 bg-slate-100/70 dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-10">
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Practical Core Skill</span>
+          <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Prompt Engineering Framework</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+            The mathematical 5-part architecture to transform vague, ambiguous instructions into deterministic, high-accuracy enterprise outputs.
+          </p>
+        </div>
+
+        <!-- The 5-Part Formula Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 mb-10">
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+            <span class="text-xs font-mono font-bold text-brand-600 dark:text-brand-400 block mb-1">PART 1</span>
+            <div class="font-extrabold text-slate-900 dark:text-white text-sm uppercase">ROLE</div>
+            <p class="text-[11px] text-slate-500 mt-1">Who the LLM acts as ("You are an AI HR Assistant")</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+            <span class="text-xs font-mono font-bold text-brand-600 dark:text-brand-400 block mb-1">PART 2</span>
+            <div class="font-extrabold text-slate-900 dark:text-white text-sm uppercase">TASK</div>
+            <p class="text-[11px] text-slate-500 mt-1">Exact actions ("Extract technical skills & compare with JD")</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+            <span class="text-xs font-mono font-bold text-brand-600 dark:text-brand-400 block mb-1">PART 3</span>
+            <div class="font-extrabold text-slate-900 dark:text-white text-sm uppercase">CONTEXT</div>
+            <p class="text-[11px] text-slate-500 mt-1">Background data ("Candidate applying for Data Scientist")</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+            <span class="text-xs font-mono font-bold text-brand-600 dark:text-brand-400 block mb-1">PART 4</span>
+            <div class="font-extrabold text-slate-900 dark:text-white text-sm uppercase">CONSTRAINTS</div>
+            <p class="text-[11px] text-slate-500 mt-1">Guardrails ("Do not invent skills; use only provided text")</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+            <span class="text-xs font-mono font-bold text-brand-600 dark:text-brand-400 block mb-1">PART 5</span>
+            <div class="font-extrabold text-slate-900 dark:text-white text-sm uppercase">OUTPUT FORMAT</div>
+            <p class="text-[11px] text-slate-500 mt-1">Machine structure ("Return strictly valid JSON with keys...")</p>
+          </div>
+        </div>
+
+        <!-- Prompt Evolution: Bad vs Better vs Even Better -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden mb-12">
+          <div class="p-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <span class="font-bold text-sm text-slate-800 dark:text-slate-200 flex items-center gap-2">
+              <i data-lucide="trending-up" class="w-4 h-4 text-emerald-500"></i> The Evolution of Prompt Quality (Section 23)
+            </span>
+            <span class="text-xs text-slate-500">Live Classroom Progression</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800">
+            <!-- Bad Prompt -->
+            <div class="p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-400">POOR PROMPT</span>
+                <span class="text-xs text-rose-500 font-semibold">Fails in Production</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/70 font-mono text-xs text-slate-800 dark:text-slate-200">
+                "Analyze this resume."
+              </div>
+              <ul class="text-[11px] text-slate-500 space-y-1">
+                <li>&bull; No role context or candidate persona</li>
+                <li>&bull; Unknown target job specification</li>
+                <li>&bull; Vague prose output cannot be parsed by code</li>
+                <li>&bull; High hallucination probability</li>
+              </ul>
+            </div>
+
+            <!-- Better Prompt -->
+            <div class="p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-400">BETTER PROMPT</span>
+                <span class="text-xs text-blue-500 font-semibold">Partial Specifics</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/70 font-mono text-xs text-slate-800 dark:text-slate-200">
+                "Analyze the following resume and identify the candidate's technical skills, databases, and ML experience."
+              </div>
+              <ul class="text-[11px] text-slate-500 space-y-1">
+                <li>&bull; Clearer task specifications</li>
+                <li>&bull; Still lacks guardrails against inventing skills</li>
+                <li>&bull; Unstructured paragraphs still break software integration</li>
+              </ul>
+            </div>
+
+            <!-- Production Grade Prompt -->
+            <div class="p-5 space-y-3 bg-brand-50/30 dark:bg-brand-950/20">
+              <div class="flex items-center justify-between">
+                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400">ENTERPRISE GRADE</span>
+                <span class="text-xs text-emerald-600 dark:text-emerald-400 font-bold">&check; Recommended</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900 text-emerald-300 font-mono text-xs overflow-x-auto">
+<pre class="whitespace-pre-wrap">You are an AI HR Assistant.
+Analyze candidate resume against Data Scientist JD.
+Extract: 1. Languages 2. Frameworks 3. Experience 4. Missing skills.
+CONSTRAINTS: Do not assume missing skills. Use only explicit text.
+OUTPUT: Return strictly valid JSON containing {skills, experience, matched, missing, questions}.</pre>
+              </div>
+              <ul class="text-[11px] text-slate-600 dark:text-slate-400 space-y-1">
+                <li>&bull; Complete 5-part framework implemented</li>
+                <li>&bull; Zero hallucination guarantee clause</li>
+                <li>&bull; Deterministic JSON for Python <code class="font-mono">json.loads()</code></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ZERO-SHOT VS FEW-SHOT DEMONSTRATOR -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">Zero-Shot Prompting</h3>
+              <span class="px-2 py-0.5 rounded text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono">0 Examples</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              The model relies exclusively on pre-trained internal weights and instruction guidelines without reference input/output pairs.
+            </p>
+            <div class="p-3.5 rounded-xl bg-slate-900 font-mono text-xs text-slate-200 space-y-2">
+              <div class="text-slate-400"># Instruction only:</div>
+              <div class="text-emerald-400">Extract technical skills from: "Python developer with Django and SQL."</div>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">Few-Shot Prompting</h3>
+              <span class="px-2 py-0.5 rounded text-xs bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300 font-mono">2+ Exemplars</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              Provides the LLM with 1–3 explicit demonstration input/output pairs to establish an exact response syntax and entity categorization pattern.
+            </p>
+            <div class="p-3.5 rounded-xl bg-slate-900 font-mono text-xs text-slate-200 space-y-2 max-h-40 overflow-y-auto">
+              <div class="text-slate-400"># Example 1:</div>
+              <div>Input: "Python, SQL and Pandas" &rarr; {"skills": ["Python", "SQL", "Pandas"]}</div>
+              <div class="text-slate-400 mt-2"># Example 2:</div>
+              <div>Input: "Java, Spring Boot, MySQL" &rarr; {"skills": ["Java", "Spring Boot", "MySQL"]}</div>
+              <div class="text-brand-400 mt-2"># Now complete:</div>
+              <div class="text-emerald-400">Input: "Python, TensorFlow, SQL and AWS" &rarr; ...</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE LAB: AI HR ASSISTANT SIMULATOR -->
+    <section id="interactive-lab" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 text-xs font-semibold mb-2">
+            <i data-lucide="play" class="w-3.5 h-3.5"></i> Live Hands-On Application
+          </div>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+            Interactive AI HR Assistant Lab
+          </h2>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+            Experience the dual-engine synergy: Deterministic Python set math + LLM qualitative synthesis.
+          </p>
+        </div>
+
+        <!-- Sample Presets Section with 6 Candidates & 4 Job Profiles -->
+        <div class="space-y-2">
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="text-xs text-slate-500 font-semibold flex items-center gap-1 mr-1">
+              <i data-lucide="users" class="w-3.5 h-3.5 text-brand-500"></i> Resumes:
+            </span>
+            <button id="load-rahul" class="preset-cand-btn active px-2.5 py-1 rounded-lg bg-brand-600 text-white text-xs font-semibold shadow-sm transition" data-id="rahul">
+              Rahul K. (2y)
+            </button>
+            <button id="load-priya" class="preset-cand-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition" data-id="priya">
+              Priya S. (1.5y)
+            </button>
+            <button id="load-arun" class="preset-cand-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition" data-id="arun">
+              Arun K. (Cloud 4y)
+            </button>
+            <button id="load-sneha" class="preset-cand-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition" data-id="sneha">
+              Sneha P. (Full Stack 2y)
+            </button>
+            <button id="load-vikram" class="preset-cand-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition" data-id="vikram">
+              Vikram V. (Sr AI 5y)
+            </button>
+            <button id="load-neha" class="preset-cand-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition" data-id="neha">
+              Neha R. (Fresher 0y)
+            </button>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="text-xs text-slate-500 font-semibold flex items-center gap-1 mr-1">
+              <i data-lucide="target" class="w-3.5 h-3.5 text-indigo-500"></i> Target JD:
+            </span>
+            <button class="preset-jd-btn active px-2 py-0.5 rounded text-[11px] font-mono bg-indigo-600 text-white font-semibold shadow-sm transition" data-jd="ds">
+              Data Scientist
+            </button>
+            <button class="preset-jd-btn px-2 py-0.5 rounded text-[11px] font-mono bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition" data-jd="genai">
+              AI & LLM Engineer
+            </button>
+            <button class="preset-jd-btn px-2 py-0.5 rounded text-[11px] font-mono bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition" data-jd="devops">
+              Cloud DevOps
+            </button>
+            <button class="preset-jd-btn px-2 py-0.5 rounded text-[11px] font-mono bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition" data-jd="web">
+              Full Stack Web
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Lab Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Left: Input Editors (Resume + JD) -->
+        <div class="lg:col-span-6 space-y-4">
+          
+          <!-- Candidate Resume Card -->
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <label class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="file-text" class="w-4 h-4 text-brand-500"></i> Candidate Resume Text
+              </label>
+              <span id="candidate-badge" class="text-[11px] font-mono px-2 py-0.5 rounded bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300 font-semibold">Rahul Kumar</span>
+            </div>
+            <textarea id="lab-resume" rows="6" class="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono focus:ring-2 focus:ring-brand-500 outline-none leading-relaxed">Rahul Kumar
+B.Tech Computer Science
+
+Skills:
+Python, SQL, Pandas, NumPy, Scikit-learn, Machine Learning, Power BI
+
+Experience:
+2 years as Data Analyst</textarea>
+          </div>
+
+          <!-- Job Description Card -->
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <label class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="briefcase" class="w-4 h-4 text-indigo-500"></i> Target Job Description
+              </label>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-semibold">Data Scientist Role</span>
+            </div>
+            <textarea id="lab-jd" rows="6" class="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono focus:ring-2 focus:ring-indigo-500 outline-none leading-relaxed">Data Scientist
+
+Required Skills:
+Python
+SQL
+Machine Learning
+Pandas
+Scikit-learn
+Statistics
+Power BI</textarea>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex items-center gap-3 pt-2">
+            <button id="run-analysis-btn" class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-brand-600 via-indigo-600 to-accent-cyan hover:from-brand-700 hover:to-indigo-700 text-white font-bold text-sm shadow-lg shadow-brand-500/25 flex items-center justify-center gap-2 transition transform active:scale-98">
+              <i data-lucide="play" class="w-4 h-4 fill-current"></i> Analyze Candidate & Run Matching
+            </button>
+            <button id="inject-hallucination-btn" class="py-3 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-100 dark:hover:bg-rose-950/40 text-slate-600 dark:text-slate-300 hover:text-rose-600 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition" title="Test how AI handles fake questions like '5 years AWS'">
+              <i data-lucide="shield-alert" class="w-4 h-4"></i>
+            </button>
+          </div>
+          
+        </div>
+
+        <!-- Right: Real-time Analysis Dashboard -->
+        <div class="lg:col-span-6 space-y-4">
+          
+          <!-- Match Gauge & Stats Box -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Match Score Indicator</span>
+                <h4 id="lab-candidate-name" class="text-xl font-extrabold text-slate-900 dark:text-white">Rahul Kumar</h4>
+              </div>
+              
+              <!-- Circular Match Gauge -->
+              <div class="flex items-center gap-3">
+                <div class="text-right">
+                  <div id="match-pct-text" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">85.7%</div>
+                  <span class="text-[11px] text-slate-400 font-mono" id="match-ratio-text">6 / 7 skills</span>
+                </div>
+                <div class="relative w-14 h-14">
+                  <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                    <path class="text-slate-200 dark:text-slate-800" stroke-width="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                    <path id="match-circle-bar" class="text-emerald-500 transition-all duration-700 ease-out" stroke-dasharray="85.7, 100" stroke-width="3.5" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Matched Skills Pills -->
+            <div class="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Matched Technical Skills (<span id="count-matched">6</span>)
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">Python Set Intersection</span>
+              </div>
+              <div id="matched-skills-container" class="flex flex-wrap gap-1.5">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Missing Skills / Skill Gaps -->
+            <div class="space-y-2 pt-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-rose-700 dark:text-rose-400 flex items-center gap-1.5">
+                  <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Skill Gaps for Role (<span id="count-missing">1</span>)
+                </span>
+                <span class="text-[11px] font-mono text-slate-400">Set Difference</span>
+              </div>
+              <div id="missing-skills-container" class="flex flex-wrap gap-1.5">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Warning Notice regarding Scores -->
+            <div class="p-2.5 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 text-[11px] text-amber-800 dark:text-amber-300 flex items-start gap-2">
+              <i data-lucide="info" class="w-4 h-4 shrink-0 mt-0.5"></i>
+              <span><strong>Limitation Note (Section 23):</strong> Match percentage is only an indicator of syllabus overlap. It must never replace a holistic human evaluation.</span>
+            </div>
+          </div>
+
+          <!-- LLM Qualitative Reasoning Tabs (Questions & JSON) -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <div class="flex items-center space-x-2">
+                <button id="tab-btn-questions" class="px-3 py-1 rounded-lg text-xs font-bold bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300">
+                  Targeted Interview Questions
+                </button>
+                <button id="tab-btn-json" class="px-3 py-1 rounded-lg text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
+                  Raw JSON Payload
+                </button>
+              </div>
+              <span class="text-[11px] font-mono text-slate-400">Generated via LLM Prompt</span>
+            </div>
+
+            <!-- Questions View -->
+            <div id="view-questions" class="space-y-2">
+              <div class="text-xs text-slate-500 mb-2">Evidence-based questions to probe candidate qualifications:</div>
+              <ol id="interview-questions-list" class="space-y-2 text-xs text-slate-700 dark:text-slate-300 list-decimal pl-4">
+                <!-- Injected via JS -->
+              </ol>
+            </div>
+
+            <!-- JSON View -->
+            <div id="view-json" class="hidden">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs text-slate-500">Structured JSON Output ready for Web App or DB:</span>
+                <button id="copy-json-btn" class="text-xs text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1">
+                  <i data-lucide="copy" class="w-3 h-3"></i> Copy JSON
+                </button>
+              </div>
+              <pre id="raw-json-display" class="p-4 rounded-xl bg-slate-950 text-emerald-400 font-mono text-xs overflow-x-auto max-h-60 overflow-y-auto leading-relaxed"></pre>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SECTION: ADDITIONAL INTERACTIVE EXERCISES -->
+    <section id="exercises" class="py-16 bg-slate-100/70 dark:bg-slate-900/60 border-y border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 text-xs font-semibold mb-2">
+            <i data-lucide="layers" class="w-3.5 h-3.5"></i> Practical Reinforcement Labs
+          </div>
+          <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">
+            4 Specialized Interactive Engineering Exercises
+          </h2>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+            Reinforce core concepts through hands-on simulations: detect hallucinations, calculate token budgets, calibrate few-shot output schemas, and audit recruitment bias.
+          </p>
+        </div>
+
+        <!-- Exercises Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          
+          <!-- EXERCISE 1: HALLUCINATION INSPECTOR -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300">
+                Exercise 1: Hallucination Spotter
+              </span>
+              <span class="text-xs text-slate-400">Section 16 & 36</span>
+            </div>
+            
+            <h4 class="font-bold text-slate-900 dark:text-white text-base">
+              Candidate Resume Excerpt (Arun Kumar):
+            </h4>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/70 font-mono text-xs text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+              "Arun Kumar &bull; 4 years Backend Experience &bull; Skills: Python, Docker, Kubernetes, MySQL, Linux, Git. Worked on microservices deployment and REST API maintenance."
+            </div>
+
+            <p class="text-xs text-slate-500 font-medium">
+              Which of the following 4 claims generated by an ungrounded LLM are <strong class="text-rose-600 dark:text-rose-400">UNSUPPORTED HALLUCINATIONS</strong>? (Select all that apply):
+            </p>
+
+            <div class="space-y-2.5 text-xs" id="hallucination-quiz-container">
+              <label class="flex items-start gap-2.5 p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition">
+                <input type="checkbox" class="hallucination-check mt-0.5 rounded text-rose-600 focus:ring-rose-500" data-claim="1" data-is-hallucination="false">
+                <div>
+                  <span class="font-semibold text-slate-800 dark:text-slate-200 block">Claim A:</span>
+                  <span class="text-slate-600 dark:text-slate-400">"Arun has production experience containerizing services using Docker."</span>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-2.5 p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition">
+                <input type="checkbox" class="hallucination-check mt-0.5 rounded text-rose-600 focus:ring-rose-500" data-claim="2" data-is-hallucination="true">
+                <div>
+                  <span class="font-semibold text-slate-800 dark:text-slate-200 block">Claim B:</span>
+                  <span class="text-slate-600 dark:text-slate-400">"Arun has 5 years of certified AWS Cloud Solutions Architecture leadership."</span>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-2.5 p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition">
+                <input type="checkbox" class="hallucination-check mt-0.5 rounded text-rose-600 focus:ring-rose-500" data-claim="3" data-is-hallucination="false">
+                <div>
+                  <span class="font-semibold text-slate-800 dark:text-slate-200 block">Claim C:</span>
+                  <span class="text-slate-600 dark:text-slate-400">"Arun has maintained backend databases utilizing MySQL."</span>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-2.5 p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition">
+                <input type="checkbox" class="hallucination-check mt-0.5 rounded text-rose-600 focus:ring-rose-500" data-claim="4" data-is-hallucination="true">
+                <div>
+                  <span class="font-semibold text-slate-800 dark:text-slate-200 block">Claim D:</span>
+                  <span class="text-slate-600 dark:text-slate-400">"Arun completed his Ph.D. in Generative AI Transformers from Stanford."</span>
+                </div>
+              </label>
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <span id="hallucination-feedback" class="text-xs font-semibold text-slate-500">Select claims and verify</span>
+              <button id="check-hallucination-btn" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold transition">
+                Verify Hallucinations
+              </button>
+            </div>
+          </div>
+
+          <!-- EXERCISE 2: CONTEXT WINDOW & TOKEN BUDGET CALCULATOR -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">
+                Exercise 2: Token & Cost Calculator
+              </span>
+              <span class="text-xs text-slate-400">Section 9, 18 & 19</span>
+            </div>
+
+            <h4 class="font-bold text-slate-900 dark:text-white text-base">
+              Context Envelope & API Cost Estimator:
+            </h4>
+
+            <div class="space-y-3 text-xs">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-600 dark:text-slate-400">Resume Length: <strong id="val-resume-pages" class="text-slate-900 dark:text-white">2 pages</strong></span>
+                  <span class="text-slate-400 font-mono" id="tokens-resume">~1,000 tokens</span>
+                </div>
+                <input type="range" id="slider-resume" min="1" max="10" value="2" class="w-full accent-emerald-600">
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-600 dark:text-slate-400">Job Description Length: <strong id="val-jd-pages" class="text-slate-900 dark:text-white">1 page</strong></span>
+                  <span class="text-slate-400 font-mono" id="tokens-jd">~400 tokens</span>
+                </div>
+                <input type="range" id="slider-jd" min="1" max="5" value="1" class="w-full accent-emerald-600">
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-600 dark:text-slate-400">System Instructions & Few-Shot Prompts:</span>
+                  <span class="text-slate-400 font-mono" id="tokens-sys">~350 tokens</span>
+                </div>
+                <input type="range" id="slider-sys" min="100" max="1000" step="50" value="350" class="w-full accent-emerald-600">
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-600 dark:text-slate-400">Expected Structured JSON Output:</span>
+                  <span class="text-slate-400 font-mono" id="tokens-out">~500 tokens</span>
+                </div>
+                <input type="range" id="slider-out" min="200" max="1500" step="50" value="500" class="w-full accent-emerald-600">
+              </div>
+            </div>
+
+            <!-- Calculated Totals Box -->
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500">Total Request Envelope:</span>
+                <span id="total-calc-tokens" class="text-base font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">2,250 tokens</span>
+              </div>
+              
+              <!-- Progress Bar in 128k context -->
+              <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                <div id="bar-context-pct" class="bg-emerald-500 h-full rounded-full transition-all duration-300" style="width: 1.7%;"></div>
+              </div>
+              <div class="flex justify-between text-[10px] text-slate-400">
+                <span>0 tokens</span>
+                <span id="context-ratio-text">2.2k / 128,000 (GPT-4o)</span>
+              </div>
+
+              <div class="pt-2 border-t border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-2 text-[11px]">
+                <div class="p-2 rounded bg-white dark:bg-slate-900 border">
+                  <span class="text-slate-400 block">Cost / 1,000 Resumes:</span>
+                  <span id="cost-gpt" class="font-bold text-slate-800 dark:text-slate-200 font-mono">$0.56 (GPT-4o-mini)</span>
+                </div>
+                <div class="p-2 rounded bg-white dark:bg-slate-900 border">
+                  <span class="text-slate-400 block">Local Inference (Ollama):</span>
+                  <span class="font-bold text-emerald-600 dark:text-emerald-400 font-mono">$0.00 (Self-Hosted)</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- EXERCISE 3: FEW-SHOT SCHEMA CALIBRATION -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300">
+                Exercise 3: Few-Shot Calibrator
+              </span>
+              <span class="text-xs text-slate-400">Section 14 & 31</span>
+            </div>
+
+            <h4 class="font-bold text-slate-900 dark:text-white text-base">
+              Non-Standard Resume Extraction Comparison:
+            </h4>
+            <div class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-mono text-slate-700 dark:text-slate-300">
+              Input: "B.Tech Mech 2021 from Anna Univ with 8.4 CGPA. Completed AWS Certified Solutions Architect in 2023."
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button id="btn-show-zeroshot" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-semibold bg-brand-600 text-white shadow-sm">
+                Zero-Shot Prompt Result
+              </button>
+              <button id="btn-show-fewshot" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                2-Shot Prompt Result
+              </button>
+            </div>
+
+            <div id="fewshot-output-display" class="p-3.5 rounded-xl bg-slate-950 text-xs font-mono min-h-[120px] overflow-x-auto text-amber-300 leading-relaxed">
+              // Zero-Shot Output (Loose Prose, Inconsistent Schema):
+              "The candidate has a Bachelor of Technology degree in Mechanical Engineering completed in 2021 from Anna University scoring an 8.4 CGPA. They also hold an AWS Solutions Architect certificate acquired in 2023."
+            </div>
+
+            <p class="text-[11px] text-slate-500">
+              <strong>Observation:</strong> Few-shot prompting forces the LLM to adhere to precise programmatic JSON types, bypassing conversational preamble.
+            </p>
+          </div>
+
+          <!-- EXERCISE 4: RESPONSIBLE AI BIAS AUDIT -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300">
+                Exercise 4: Responsible AI Bias Audit
+              </span>
+              <span class="text-xs text-slate-400">Section 17, 39 & 40</span>
+            </div>
+
+            <h4 class="font-bold text-slate-900 dark:text-white text-base">
+              Recruitment Prompt Bias Diagnostic:
+            </h4>
+            
+            <div class="space-y-2 text-xs">
+              <button class="bias-scenario-btn w-full text-left p-3 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 transition active" data-scenario="1">
+                <div class="font-bold text-purple-900 dark:text-purple-200">Scenario A: Age & Graduation Date Proxy</div>
+                <div class="text-[11px] text-purple-700 dark:text-purple-300">"Only consider candidates who graduated college after 2020."</div>
+              </button>
+
+              <button class="bias-scenario-btn w-full text-left p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition" data-scenario="2">
+                <div class="font-bold text-slate-800 dark:text-slate-200">Scenario B: University Pedigree Exclusivity</div>
+                <div class="text-[11px] text-slate-500">"Reject any candidate who did not attend an elite Tier-1 university."</div>
+              </button>
+
+              <button class="bias-scenario-btn w-full text-left p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition" data-scenario="3">
+                <div class="font-bold text-slate-800 dark:text-slate-200">Scenario C: Autonomous Machine Rejection</div>
+                <div class="text-[11px] text-slate-500">"Automatically dispatch rejection letters if match % is under 75%."</div>
+              </button>
+            </div>
+
+            <!-- Diagnostic Explanation Card -->
+            <div id="bias-audit-feedback" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs space-y-1.5">
+              <div class="font-bold text-rose-600 dark:text-rose-400 flex items-center gap-1.5">
+                <i data-lucide="alert-octagon" class="w-4 h-4"></i> Ethical & Legal Hazard:
+              </div>
+              <p class="text-slate-600 dark:text-slate-300" id="bias-hazard-text">
+                Filtering by graduation date acts as an unlawful proxy for age discrimination (Age Discrimination in Employment Act / EEOC). Senior qualified candidates are unfairly eliminated regardless of competency.
+              </p>
+              <div class="pt-1 font-bold text-emerald-600 dark:text-emerald-400">Compliant Enterprise Solution:</div>
+              <p class="text-slate-600 dark:text-slate-300" id="bias-solution-text">
+                Evaluate candidates strictly on demonstrable technical skills and verified project outcomes, completely blind to graduation year.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PYTHON PRACTICAL CODE & LLM API INTEGRATION -->
+    <section id="python-practical" class="py-14 bg-slate-900 text-white border-y border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-accent-cyan">Implementation Engineering</span>
+            <h2 class="text-3xl font-extrabold mt-1">Python Practicals & Generic API Pipeline</h2>
+            <p class="text-xs text-slate-400 mt-2 max-w-2xl">
+              From variable interpolation and Python <code class="text-cyan-300">set.intersection()</code> to generic REST API requests and defensive JSON parsing.
+            </p>
+          </div>
+
+          <!-- Code Snippet Switcher -->
+          <div class="flex flex-wrap gap-2">
+            <button class="code-tab-btn active px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-800 text-cyan-300 border border-cyan-500/30" data-code="set-math">
+              01. Python Set Match
+            </button>
+            <button class="code-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-800/60 text-slate-400 border border-slate-700 hover:text-white" data-code="prompt-func">
+              02. Reusable Prompt
+            </button>
+            <button class="code-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-800/60 text-slate-400 border border-slate-700 hover:text-white" data-code="api-call">
+              03. Generic LLM API
+            </button>
+            <button class="code-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-800/60 text-slate-400 border border-slate-700 hover:text-white" data-code="json-parser">
+              04. Robust JSON Parsing
+            </button>
+          </div>
+        </div>
+
+        <!-- CODE VIEWER CONTAINER -->
+        <div class="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+          
+          <div class="p-3.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+              <span id="code-filename" class="font-mono text-xs text-slate-400 ml-2">practical_03_job_matching.py</span>
+            </div>
+            <button id="copy-code-btn" class="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 text-xs font-mono text-slate-300 flex items-center gap-1.5 transition">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Script
+            </button>
+          </div>
+
+          <!-- Code Display Block -->
+          <div class="p-6 font-mono text-xs sm:text-sm overflow-x-auto leading-relaxed text-slate-200">
+            <pre><code id="active-code-block" class="language-python"># Practical 3 & 4: Skill Matching & Match Percentage without an LLM (Sections 22, 23 & 49)
+# Connects Day 07 Python fundamentals with GenAI workflows
+
+candidate_skills = {
+    "Python",
+    "SQL",
+    "Pandas",
+    "Machine Learning",
+    "Power BI"
+}
+
+job_skills = {
+    "Python",
+    "SQL",
+    "Pandas",
+    "Machine Learning",
+    "Scikit-learn",
+    "Statistics",
+    "Power BI"
+}
+
+# 1. Deterministic Set Operations (Zero Token Cost!)
+matched_skills = candidate_skills.intersection(job_skills)
+missing_skills = job_skills.difference(candidate_skills)
+
+# 2. Percentage Calculation
+match_percentage = (len(matched_skills) / len(job_skills)) * 100
+
+print(f"Matched Skills: {matched_skills}")
+print(f"Missing Skills: {missing_skills}")
+print(f"Match Percentage: {match_percentage:.2f}%")
+
+# Important Classroom Note:
+# Use Python for deterministic calculations and set math;
+# Use the LLM for entity extraction, unstructured parsing, and reasoning!</code></pre>
+          </div>
+
+          <!-- Run Code Simulation Output -->
+          <div class="p-4 bg-slate-900/90 border-t border-slate-800">
+            <div class="flex items-center justify-between text-xs text-slate-400 mb-2 font-mono">
+              <span class="flex items-center gap-1"><i data-lucide="terminal" class="w-3.5 h-3.5 text-emerald-400"></i> Terminal Output</span>
+              <span class="text-emerald-400">Exit code: 0</span>
+            </div>
+            <div id="code-output-terminal" class="font-mono text-xs text-emerald-400 bg-slate-950 p-3 rounded-lg">
+              Matched Skills: {'Python', 'Power BI', 'SQL', 'Pandas', 'Machine Learning'}<br>
+              Missing Skills: {'Statistics', 'Scikit-learn'}<br>
+              Match Percentage: 71.43%
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PRACTICAL CHALLENGE & 20-MARK RUBRIC -->
+    <section id="challenge" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Classroom Assessment</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Prompt Engineering Challenge Arena</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          Challenge: Optimize a poor prompt for candidate Priya Sharma against the Data Scientist job role. Evaluate against the 20-mark official rubric.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Challenge Brief & Workspace -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- Candidate & JD Accordion -->
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="user-check" class="w-4 h-4 text-purple-500"></i> Assessment Target: Priya Sharma
+              </h4>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 font-semibold">1.5 yrs experience</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
+              <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                <strong class="text-slate-800 dark:text-slate-200 block mb-1">Resume Details:</strong>
+                Priya Sharma (MCA)<br>
+                Skills: Python, SQL, Excel, Pandas, Power BI, Machine Learning<br>
+                Experience: 1.5 yrs Junior Data Analyst
+              </div>
+              <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                <strong class="text-slate-800 dark:text-slate-200 block mb-1">Target Job Requirements:</strong>
+                Data Scientist<br>
+                Required: Python, SQL, Machine Learning, Statistics, Deep Learning, TensorFlow, Pandas
+              </div>
+            </div>
+          </div>
+
+          <!-- Prompt Construction Box -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <label class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="edit-3" class="w-4 h-4 text-amber-500"></i> Your Engineered Prompt Submission
+              </label>
+              <button id="load-ideal-prompt" class="text-xs text-brand-600 dark:text-brand-400 hover:underline">
+                Load Model Answer
+              </button>
+            </div>
+
+            <textarea id="challenge-prompt-input" rows="8" class="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono focus:ring-2 focus:ring-amber-500 outline-none leading-relaxed" placeholder="Type your 5-part prompt here (Include Role, Task, Context, Constraints, and strict JSON format)...">Analyze this resume and tell me if the person is good for the job.</textarea>
+
+            <div class="flex items-center justify-between pt-2">
+              <span class="text-xs text-slate-400">Must include all 5 components of the Day 09 framework.</span>
+              <button id="evaluate-prompt-btn" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-bold shadow-md transition transform active:scale-95 flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i> Evaluate Submission
+              </button>
+            </div>
+          </div>
+
+          <!-- Live Evaluation Feedback Alert -->
+          <div id="challenge-feedback-box" class="hidden p-4 rounded-xl border">
+            <!-- Dynamically populated -->
+          </div>
+
+        </div>
+
+        <!-- 20-Mark Evaluation Rubric Table -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="clipboard-check" class="w-4 h-4 text-emerald-500"></i> Official 20-Mark Grading Rubric
+              </h4>
+              <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">Total: 20 M</span>
+            </div>
+
+            <div class="divide-y divide-slate-100 dark:divide-slate-800 text-xs">
+              <div class="py-2.5 flex items-center justify-between">
+                <div>
+                  <span class="font-bold text-slate-800 dark:text-slate-200 block">1. GenAI & LLM Concepts</span>
+                  <span class="text-[11px] text-slate-400">Explains tokens, context & LLM differences</span>
+                </div>
+                <span class="font-mono font-bold text-slate-700 dark:text-slate-300">2 Marks</span>
+              </div>
+              <div class="py-2.5 flex items-center justify-between">
+                <div>
+                  <span class="font-bold text-slate-800 dark:text-slate-200 block">2. Prompt Quality & Formula</span>
+                  <span class="text-[11px] text-slate-400">Role, Task, Context, Constraints & Output</span>
+                </div>
+                <span class="font-mono font-bold text-brand-600 dark:text-brand-400">4 Marks</span>
+              </div>
+              <div class="py-2.5 flex items-center justify-between">
+                <div>
+                  <span class="font-bold text-slate-800 dark:text-slate-200 block">3. Few-Shot Exemplars</span>
+                  <span class="text-[11px] text-slate-400">Demonstrates expected skill extraction pairs</span>
+                </div>
+                <span class="font-mono font-bold text-slate-700 dark:text-slate-300">2 Marks</span>
+              </div>
+              <div class="py-2.5 flex items-center justify-between">
+                <div>
+                  <span class="font-bold text-slate-800 dark:text-slate-200 block">4. Structured JSON Output</span>
+                  <span class="text-[11px] text-slate-400">Valid syntax, keys, and null fallbacks</span>
+                </div>
+                <span class="font-mono font-bold text-emerald-600 dark:text-emerald-400">3 Marks</span>
+              </div>
+              <div class="py-2.5 flex items-center justify-between">
+                <div>
+                  <span class="font-bold text-slate-800 dark:text-slate-200 block">5. Python Implementation</span>
+                  <span class="text-[11px] text-slate-400">Set intersections, match % & JSON parsing</span>
+                </div>
+                <span class="font-mono font-bold text-cyan-600 dark:text-cyan-400">3 Marks</span>
+              </div>
+              <div class="py-2.5 flex items-center justify-between">
+                <div>
+                  <span class="font-bold text-slate-800 dark:text-slate-200 block">6. Resume Analysis Precision</span>
+                  <span class="text-[11px] text-slate-400">Accurately flags Priya's missing Deep Learning skills</span>
+                </div>
+                <span class="font-mono font-bold text-slate-700 dark:text-slate-300">2 Marks</span>
+              </div>
+              <div class="py-2.5 flex items-center justify-between">
+                <div>
+                  <span class="font-bold text-slate-800 dark:text-slate-200 block">7. Hallucination Awareness</span>
+                  <span class="text-[11px] text-slate-400">Explicit instruction not to invent qualifications</span>
+                </div>
+                <span class="font-mono font-bold text-rose-600 dark:text-rose-400">2 Marks</span>
+              </div>
+              <div class="py-2.5 flex items-center justify-between">
+                <div>
+                  <span class="font-bold text-slate-800 dark:text-slate-200 block">8. Responsible AI Guardrails</span>
+                  <span class="text-[11px] text-slate-400">Human-in-the-loop clause; no auto-rejections</span>
+                </div>
+                <span class="font-mono font-bold text-purple-600 dark:text-purple-400">2 Marks</span>
+              </div>
+            </div>
+
+            <!-- Score Visualizer -->
+            <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-center">
+              <span class="text-xs text-slate-500">Benchmark Score for Priya Sharma Solution:</span>
+              <div class="text-2xl font-black text-amber-600 dark:text-amber-400 mt-0.5">20 / 20 Marks</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TRAINER CHEATSHEET & BOARD PRESENTATION MODE -->
+    <section id="trainer-mode" class="py-14 bg-slate-100/70 dark:bg-slate-900/40 border-t border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Facilitator Toolkit</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Trainer Cheatsheet & Board Blueprint</h2>
+          </div>
+          <div class="text-xs text-slate-500 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
+            For Classroom Instruction & Whiteboard Diagrams
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Board Summary 1 -->
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+              <i data-lucide="monitor" class="w-4 h-4 text-blue-500"></i> Board Summary (Section 67)
+            </h4>
+            <div class="p-3.5 rounded-xl bg-slate-950 text-emerald-400 font-mono text-xs leading-relaxed overflow-x-auto">
+              GENERATIVE AI<br>
+              &nbsp;&nbsp;&darr;<br>
+              LLM<br>
+              &nbsp;&nbsp;&darr;<br>
+              TRANSFORMER<br>
+              &nbsp;&nbsp;&darr;<br>
+              ATTENTION<br>
+              &nbsp;&nbsp;&darr;<br>
+              TOKENS<br>
+              &nbsp;&nbsp;&darr;<br>
+              CONTEXT<br>
+              &nbsp;&nbsp;&darr;<br>
+              PROMPT<br>
+              &nbsp;&nbsp;&darr;<br>
+              LLM API<br>
+              &nbsp;&nbsp;&darr;<br>
+              STRUCTURED OUTPUT<br>
+              &nbsp;&nbsp;&darr;<br>
+              APPLICATION
+            </div>
+            <div class="text-[11px] font-mono text-slate-500">
+              Write this vertical pipeline on the whiteboard before beginning the afternoon practical.
+            </div>
+          </div>
+
+          <!-- Common Student Mistakes -->
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+              <i data-lucide="alert-octagon" class="w-4 h-4 text-rose-500"></i> 6 Common Student Mistakes (Section 66)
+            </h4>
+            <ul class="text-xs space-y-2 text-slate-600 dark:text-slate-300">
+              <li><strong class="text-rose-600 dark:text-rose-400">1. Vague prompt:</strong> Writing "Analyze this" with no role or schema.</li>
+              <li><strong class="text-rose-600 dark:text-rose-400">2. Missing format:</strong> Forgetting to enforce strict JSON syntax.</li>
+              <li><strong class="text-rose-600 dark:text-rose-400">3. Hallucination trigger:</strong> Asking model to invent missing information.</li>
+              <li><strong class="text-rose-600 dark:text-rose-400">4. Insecure API keys:</strong> Hardcoding API keys into public Colab notebooks.</li>
+              <li><strong class="text-rose-600 dark:text-rose-400">5. LLM for simple math:</strong> Using an LLM to calculate match % instead of Python sets.</li>
+              <li><strong class="text-rose-600 dark:text-rose-400">6. Autonomous hiring:</strong> Designing AI to auto-reject job candidates.</li>
+            </ul>
+          </div>
+
+          <!-- 5-Hour Teaching Plan Table -->
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+              <i data-lucide="calendar" class="w-4 h-4 text-amber-500"></i> 5-Hour Plan (Section 69)
+            </h4>
+            <div class="text-[11px] divide-y divide-slate-100 dark:divide-slate-800 max-h-64 overflow-y-auto">
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">9:30–9:45</span> <span>GenAI Intro Discussion</span></div>
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">9:45–10:10</span> <span>AI vs ML vs DL vs GenAI</span></div>
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">10:10–10:40</span> <span>LLM Statistical Patterns</span></div>
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">10:40–11:10</span> <span>Transformers & Attention</span></div>
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">11:10–11:30</span> <span>Tokens & Context Windows</span></div>
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">11:30–12:00</span> <span>Live Prompt Engineering</span></div>
+              <div class="py-1.5 flex justify-between bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 font-bold px-1"><span class="font-mono">12:00–1:00</span> <span>Lunch Break</span></div>
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">1:00–1:25</span> <span>Zero-Shot & Few-Shot Hands-on</span></div>
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">1:25–1:50</span> <span>Structured Outputs & JSON</span></div>
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">1:50–2:10</span> <span>Hallucinations & Ethics</span></div>
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">2:10–2:30</span> <span>LLM API REST Protocols</span></div>
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">2:30–3:00</span> <span>Python Skill Set Intersection</span></div>
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">3:00–3:20</span> <span>Mini Project: AI HR Assistant</span></div>
+              <div class="py-1.5 flex justify-between"><span class="font-mono text-slate-400">3:20–3:30</span> <span>Prompt Challenge & Wrap-up</span></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 15 INTERVIEW QUESTIONS ACCORDION -->
+    <section id="qna" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Interview Readiness</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">15 Essential Interview Questions & Answers</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          From basic terminology to advanced architectural trade-offs. Click any card to reveal model interview responses.
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="flex items-center justify-center gap-2 mb-8">
+        <button class="qna-filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold transition" data-filter="all">All 15 Questions</button>
+        <button class="qna-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition" data-filter="basic">Basic (1–5)</button>
+        <button class="qna-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition" data-filter="intermediate">Intermediate (6–10)</button>
+        <button class="qna-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition" data-filter="advanced">Advanced (11–15)</button>
+      </div>
+
+      <!-- Questions Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="qna-accordion-container">
+        <!-- Dynamically rendered by JavaScript -->
+      </div>
+
+    </section>
+
+    <!-- STUDENT NOTEBOOK DOWNLOAD & FOOTER BANNER -->
+    <section class="py-12 bg-gradient-to-r from-brand-900 via-indigo-900 to-slate-900 text-white border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+        <div class="w-12 h-12 rounded-2xl bg-white/10 mx-auto flex items-center justify-center">
+          <i data-lucide="book-open" class="w-6 h-6 text-cyan-300"></i>
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-extrabold">Ready to Code in Google Colab?</h3>
+        <p class="text-sm text-slate-300 max-w-xl mx-auto">
+          Download the complete companion Python script with all 23 Colab sections, synthetic datasets, set intersections, and API skeletons.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <a href="notebook_starter.py" download class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-emerald-500/20 transition transform active:scale-95">
+            <i data-lucide="download" class="w-4 h-4"></i> Download notebook_starter.py
+          </a>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-semibold transition">
+            <i data-lucide="arrow-up" class="w-4 h-4"></i> Back to Top
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-800 dark:text-slate-200">Saratha University &bull; Be Practical Training</span>
+        <span>&bull;</span>
+        <span>Day 09: Generative AI & LLM Engineering I</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span>Prompt Engineering &bull; Structured JSON &bull; Responsible AI</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

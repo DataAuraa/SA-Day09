@@ -1,0 +1,101 @@
+/* Custom CSS for Day 09 Training Portal */
+
+@layer utilities {
+  /* Custom Grid Background Pattern */
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.7);
+}
+
+/* Hide scrollbar for tabs */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Active Module Tab Styling */
+.module-tab-btn {
+  color: #64748b;
+  border-bottom: 2px solid transparent;
+}
+.module-tab-btn:hover {
+  color: #4f46e5;
+}
+.module-tab-btn.active {
+  color: #4f46e5;
+  border-bottom: 2px solid #4f46e5;
+  background-color: rgba(99, 102, 241, 0.08);
+}
+.dark .module-tab-btn {
+  color: #94a3b8;
+}
+.dark .module-tab-btn:hover {
+  color: #818cf8;
+}
+.dark .module-tab-btn.active {
+  color: #818cf8;
+  border-bottom: 2px solid #818cf8;
+  background-color: rgba(129, 140, 248, 0.12);
+}
+
+/* QnA Filter Button Active */
+.qna-filter-btn {
+  background-color: rgba(241, 245, 249, 1);
+  color: #475569;
+}
+.dark .qna-filter-btn {
+  background-color: rgba(30, 41, 59, 0.8);
+  color: #94a3b8;
+}
+.qna-filter-btn.active {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+}
+
+/* Token pills animation & colors */
+.token-pill {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+.token-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Print styles for exportable course handbook */
+@media print {
+  header, #search-btn, #theme-toggle, #search-modal, #run-analysis-btn, .module-tab-btn, .qna-filter-btn, footer {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .module-content-panel {
+    display: block !important;
+    margin-bottom: 2rem !important;
+    page-break-inside: avoid;
+  }
+}
