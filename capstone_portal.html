@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capstone Portal — Career Launchpad | Day 11 & Day 12</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <!-- Mermaid.js for Architecture Rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#0b0f19',
+        primaryColor: '#151f33',
+        primaryTextColor: '#f1f5f9',
+        primaryBorderColor: '#00e5ff',
+        lineColor: '#38bdf8',
+        secondaryColor: '#1e293b',
+        tertiaryColor: '#0d1117'
+      }
+    });
+  </script>
+
+  <!-- Portal Custom Styles -->
+  <link rel="stylesheet" href="capstone_portal.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. HEADER & DYNAMIC PROGRESS DASHBOARD
+       ======================================================================== -->
+  <header class="portal-header">
+    <div class="header-top">
+      <!-- Brand Section -->
+      <div class="brand-section">
+        <div class="brand-logo">
+          <i class="fas fa-layer-group"></i>
+        </div>
+        <div class="brand-info">
+          <h1>Capstone Portal &bull; Career Launchpad</h1>
+          <div class="subtitle">
+            <span>Saratha University &bull; Phase IV Placement Accelerator</span>
+            <span class="badge-tag">Production Grade</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Back Nav to Day 09 Portal & Handbook -->
+      <div class="portal-nav-links">
+        <a href="index.html" class="portal-nav-btn" title="Return to Day 09 Training Portal">
+          <i class="fas fa-arrow-left"></i> <span>Day 09 Portal</span>
+        </a>
+        <a href="handbook.html" target="_blank" class="portal-nav-btn handbook-btn" title="View Full Printable PDF Course Handbook">
+          <i class="fas fa-file-pdf"></i> <span>Handbook PDF</span>
+        </a>
+      </div>
+
+      <!-- Day Module Switcher -->
+      <div class="day-toggle-group">
+        <button id="btnDay11" class="day-btn active" onclick="switchDayModule(11)">
+          <span class="indicator"></span>
+          <span>Day 11: Capstone Build</span>
+        </button>
+        <button id="btnDay12" class="day-btn" onclick="switchDayModule(12)">
+          <span class="indicator"></span>
+          <span>Day 12: Defense & Pitch</span>
+        </button>
+      </div>
+
+      <!-- Team Selector (15 Teams) -->
+      <div class="team-select-wrapper">
+        <select id="teamSelect" class="team-select" aria-label="Select Capstone Project Team">
+          <!-- Populated by JavaScript -->
+        </select>
+        <i class="fas fa-chevron-down select-chevron"></i>
+      </div>
+
+      <!-- 5-Hour Real-Time Sprint Timer -->
+      <div class="sprint-timer-widget">
+        <div class="timer-display">
+          <span class="timer-label">5-Hour Sprint Clock</span>
+          <span id="timerClock" class="timer-clock">01:20:00</span>
+        </div>
+        <div class="timer-controls">
+          <button id="timerToggleBtn" class="timer-btn" title="Pause / Resume Timer">
+            <i class="fas fa-pause"></i>
+          </button>
+          <button id="timerResetBtn" class="timer-btn" title="Reset Timer">
+            <i class="fas fa-redo-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Portfolio Action CTA -->
+      <button class="btn-portfolio-launch" onclick="openPortfolioModal()">
+        <i class="fas fa-rocket"></i>
+        <span>Portfolio Preview & Export</span>
+      </button>
+    </div>
+
+    <!-- Weightage Breakdown Dashboard Strip -->
+    <div class="progress-dashboard-strip">
+      <div class="progress-metrics-bar">
+        <div class="bar-segment bar-concept" title="20% Concept"></div>
+        <div class="bar-segment bar-demo" title="30% Demo"></div>
+        <div class="bar-segment bar-lab" title="35% Lab Sprint"></div>
+        <div class="bar-segment bar-assessment" title="15% Assessment"></div>
+      </div>
+      <div class="progress-legend">
+        <div class="legend-item" onclick="switchSectionByBlock(0)">
+          <span class="legend-dot dot-concept"></span>
+          <span>Concept: Architecture &amp; Foundations</span>
+          <span class="legend-pct">20% Weight (Hour 0&ndash;1)</span>
+        </div>
+        <div class="legend-item active" onclick="switchSectionByBlock(1)">
+          <span class="legend-dot dot-demo"></span>
+          <span>Demo: Walkthrough &amp; Pipelines</span>
+          <span class="legend-pct">30% Weight (Hour 1&ndash;2.5)</span>
+        </div>
+        <div class="legend-item" onclick="switchSectionByBlock(2)">
+          <span class="legend-dot dot-lab"></span>
+          <span>Lab: Core Implementation &amp; Dry Run</span>
+          <span class="legend-pct">35% Weight (Hour 2.5&ndash;4.25)</span>
+        </div>
+        <div class="legend-item" onclick="switchSectionByBlock(3)">
+          <span class="legend-dot dot-assessment"></span>
+          <span>Assessment: Audit, Viva &amp; Rubric</span>
+          <span class="legend-pct">15% Weight (Hour 4.25&ndash;5)</span>
+        </div>
+        <div style="margin-left: auto; font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-emerald);">
+          <i class="fas fa-check-circle"></i> <span id="overallProgressPct">68% Completed</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       2. MAIN CONTENT AREA & WORKPLACE
+       ======================================================================== -->
+  <div class="portal-main-wrapper">
+
+    <!-- Left Sidebar: Schedule & Team Details -->
+    <aside class="sidebar-sections">
+      <!-- Active Project Info Card -->
+      <div class="team-badge-card">
+        <div class="team-badge-header">
+          <span class="team-domain" id="sidebarTeamDomain">RETAIL SECTOR</span>
+          <span class="badge-tag" style="font-size:0.6rem;">Active</span>
+        </div>
+        <div class="team-title" id="sidebarTeamTitle">Team 1: Retail Demand Forecasting Dashboard</div>
+        <div style="font-size: 0.72rem; color: var(--text-muted);">
+          Lead: <span id="sidebarTeamLead" style="color:#fff; font-weight:600;">A. Karthik</span>
+        </div>
+        <div class="team-stack-tags" id="sidebarTeamStack">
+          <!-- Stack tags inserted via JS -->
+        </div>
+      </div>
+
+      <!-- Schedule Timeline List -->
+      <div class="sidebar-title">
+        <span>Session Schedule (4 Blocks)</span>
+        <i class="fas fa-calendar-alt"></i>
+      </div>
+      <div id="timelineSectionList" class="timeline-section-list">
+        <!-- Rendered dynamically for Day 11 or Day 12 -->
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="workspace-container">
+      
+      <!-- Workspace Top Title Bar -->
+      <div class="workspace-top-bar">
+        <div class="active-section-info">
+          <h2>
+            <span id="activeSectionBadge" class="badge-tag" style="background:rgba(59,130,246,0.15); color:#60a5fa; border-color:rgba(59,130,246,0.3);">
+              Day 11 &bull; Section 2
+            </span>
+            <span id="activeSectionTitle">From Localhost to Cloud: CI/CD Pipelines & Security</span>
+          </h2>
+          <p id="activeSectionDesc">
+            Synchronized video feed showing containerization and deployment with a code snippet sidebar.
+          </p>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           DAY 11 WORKPLACE PANELS (BUILD SPRINT)
+           ==================================================================== -->
+      <div id="day11PanelsContainer" class="module-grid-layout">
+        
+        <!-- Embedded IDE Panel -->
+        <section class="col-8 card-panel">
+          <div class="card-panel-header">
+            <span class="card-title">
+              <i class="fas fa-terminal" style="color: var(--accent-cyan);"></i>
+              Multi-Tab Developer Workspace &amp; IDE
+            </span>
+            <div class="card-actions">
+              <button class="icon-btn" onclick="copyEditorCode()" title="Copy Code">
+                <i class="far fa-copy"></i> Copy
+              </button>
+              <button class="icon-btn" onclick="downloadProjectCode()" title="Download File">
+                <i class="fas fa-download"></i> Save
+              </button>
+              <button class="icon-btn" onclick="runAutomatedTests()" id="btnRunTests" style="color:var(--accent-emerald); border-color:rgba(16,185,129,0.3);">
+                <i class="fas fa-play"></i> Run Tests
+              </button>
+            </div>
+          </div>
+          <div class="card-panel-body" style="padding:0;">
+            <div class="ide-wrapper">
+              <div class="ide-tabs-bar">
+                <button class="ide-tab active" data-file="main.py">
+                  <i class="fab fa-python" style="color:#38bdf8;"></i> main.py
+                </button>
+                <button class="ide-tab" data-file="pipeline.py">
+                  <i class="fab fa-python" style="color:#38bdf8;"></i> pipeline.py
+                </button>
+                <button class="ide-tab" data-file="schema.sql">
+                  <i class="fas fa-database" style="color:#f59e0b;"></i> schema.sql
+                </button>
+                <button class="ide-tab" data-file="docker-compose.yml">
+                  <i class="fab fa-docker" style="color:#00e5ff;"></i> docker-compose.yml
+                </button>
+                <button class="ide-tab" data-file="test_capstone.py">
+                  <i class="fas fa-vial" style="color:#10b981;"></i> test_capstone.py
+                </button>
+              </div>
+              <div class="ide-editor-container">
+                <div id="ideLineNumbers" class="ide-line-numbers"></div>
+                <textarea id="ideCodeArea" class="ide-code-area" spellcheck="false"></textarea>
+              </div>
+              <div class="ide-footer-bar">
+                <span><i class="fas fa-code-branch"></i> git: main &bull; UTF-8 &bull; Python 3.11</span>
+                <span>Lint: 0 Errors &bull; Pytest: 24 Passing</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Live Endpoint Tester (REST & FastAPI) -->
+        <section class="col-4 card-panel">
+          <div class="card-panel-header">
+            <span class="card-title">
+              <i class="fas fa-bolt" style="color: var(--accent-amber);"></i>
+              Live Endpoint Tester
+            </span>
+            <div class="card-actions">
+              <span id="apiStatusBadge" class="status-badge-200">200 OK</span>
+              <span id="apiLatencyBadge" style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">34ms</span>
+            </div>
+          </div>
+          <div class="card-panel-body endpoint-tester-card">
+            <div class="api-request-bar">
+              <select class="method-select">
+                <option value="POST">POST</option>
+                <option value="GET">GET</option>
+              </select>
+              <input type="text" id="endpointUrlInput" class="endpoint-url-input" value="/api/v1/forecast/inventory">
+              <button id="btnSendApi" class="btn-send-api" onclick="sendTestApiRequest()">
+                <i class="fas fa-paper-plane"></i> Send
+              </button>
+            </div>
+
+            <div style="font-size:0.72rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Request JSON Body</div>
+            <textarea id="apiBodyEditor" class="api-body-editor" spellcheck="false"></textarea>
+
+            <div class="response-meta">
+              <span style="font-size:0.72rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Response Payload</span>
+              <span style="font-size:0.7rem; color:var(--accent-cyan); font-family:var(--font-mono);">application/json</span>
+            </div>
+            <pre id="apiResponseOutput" class="api-response-box"></pre>
+          </div>
+        </section>
+
+        <!-- Architecture Diagram Viewer (Mermaid.js / Canvas) -->
+        <section class="col-7 card-panel">
+          <div class="card-panel-header">
+            <span class="card-title">
+              <i class="fas fa-project-diagram" style="color: var(--accent-cyan);"></i>
+              System Architecture &amp; Schema Visualizer
+            </span>
+            <div class="card-actions">
+              <button class="icon-btn" onclick="toggleMermaidEditor()">
+                <i class="fas fa-edit"></i> Edit Mermaid
+              </button>
+              <button class="icon-btn" onclick="initArchViewer()">
+                <i class="fas fa-sync-alt"></i> Redraw
+              </button>
+            </div>
+          </div>
+          <div class="card-panel-body" style="padding:0;">
+            <div class="arch-diagram-viewer">
+              <div id="archCanvasBox" class="arch-canvas-box">
+                <!-- SVG Architecture rendered here -->
+              </div>
+              <div id="mermaidDrawer" class="mermaid-code-drawer">
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+                  <span style="font-size:0.72rem; color:#94a3b8; font-family:var(--font-mono);">Mermaid.js Syntax Source</span>
+                  <button class="icon-btn" onclick="applyMermaidCode()" style="color:var(--accent-emerald);">Compile</button>
+                </div>
+                <textarea id="mermaidTextarea" class="mermaid-textarea" spellcheck="false"></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Demo & Stream Station (Video Player + Live Q&A) -->
+        <section class="col-5 card-panel">
+          <div class="card-panel-header">
+            <span class="card-title">
+              <i class="fas fa-video" style="color: var(--accent-rose);"></i>
+              Demo &amp; Stream Station (Live Walkthrough)
+            </span>
+            <span class="badge-tag" style="background:rgba(239,68,68,0.15); color:#f87171; border-color:rgba(239,68,68,0.3);">
+              <i class="fas fa-circle" style="font-size:0.5rem;"></i> Live
+            </span>
+          </div>
+          <div class="card-panel-body" style="padding:0.75rem; display:flex; flex-direction:column; gap:0.75rem;">
+            <!-- Video Mock Stream -->
+            <div class="video-player-container">
+              <div class="video-mock-stream">
+                <div class="video-watermark">
+                  <span class="live-dot"></span>
+                  <span>Saratha Accelerator Live Stream</span>
+                </div>
+                <div class="video-center-art">
+                  <i class="fas fa-chalkboard-teacher" style="font-size: 2.2rem; color: #00e5ff; margin-bottom:0.5rem;"></i>
+                  <div class="stream-title">CI/CD &amp; Cloud Deployment Walkthrough</div>
+                  <div class="instructor-pill">Prof. Anjit Raja R &bull; Lead Instructor</div>
+                </div>
+                <div class="video-controls-overlay">
+                  <div class="video-scrubber">
+                    <div class="video-progress"></div>
+                  </div>
+                  <div class="video-buttons-row">
+                    <span><i class="fas fa-play"></i> 01:24:18 / 01:30:00</span>
+                    <span>1080p &bull; 1.25x &bull; <i class="fas fa-expand"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Q&A Feed -->
+            <div style="font-size:0.75rem; font-weight:700; color:#fff; display:flex; justify-content:space-between;">
+              <span>Interactive Q&amp;A Channel</span>
+              <span style="color:var(--accent-cyan); font-size:0.7rem;">60 Students Active</span>
+            </div>
+            <div id="qaChatFeed" class="qa-chat-feed">
+              <div class="qa-card pinned">
+                <div class="qa-author-row">
+                  <span class="qa-author">Prof. Anjit Raja R (Mentor)</span>
+                  <span class="qa-pinned-badge"><i class="fas fa-thumbtack"></i> Pinned Guidance</span>
+                </div>
+                <div class="qa-text">Remember to set up Docker healthchecks before running multi-container load testing.</div>
+              </div>
+              <div class="qa-card">
+                <div class="qa-author-row">
+                  <span class="qa-author">A. Karthik (Team 1)</span>
+                  <span style="color:#64748b; font-size:0.68rem;">2 min ago</span>
+                </div>
+                <div class="qa-text">Our FastAPI endpoint latency drops below 35ms after adding async DB connection pooling!</div>
+                <div class="qa-answer">Great optimization Karthik! Include that metric in your Day 12 pitch deck.</div>
+              </div>
+            </div>
+            <div class="qa-input-bar">
+              <input type="text" id="qaInput" class="qa-input" placeholder="Ask instructor a question...">
+              <button id="btnSendQA" class="btn-send-api" style="padding:0.45rem 0.85rem;">
+                <i class="fas fa-arrow-up"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Lab Sprint Hub (Checklist + Logs + Test Coverage) -->
+        <section class="col-7 card-panel">
+          <div class="card-panel-header">
+            <span class="card-title">
+              <i class="fas fa-tasks" style="color: var(--accent-cyan);"></i>
+              Lab Sprint Hub &amp; Real-Time Execution Logs
+            </span>
+            <div class="card-actions">
+              <span class="badge-tag">35% Target Weight</span>
+            </div>
+          </div>
+          <div class="card-panel-body" style="display:flex; flex-direction:column; gap:1rem;">
+            <!-- Sprint Checklist -->
+            <div id="labChecklistContainer" class="lab-checklist-container">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Terminal Output -->
+            <div class="terminal-card">
+              <div class="terminal-header">
+                <div class="terminal-dots">
+                  <span class="tdot tdot-red"></span>
+                  <span class="tdot tdot-yellow"></span>
+                  <span class="tdot tdot-green"></span>
+                </div>
+                <span>bash &bull; capstone-sprint-worker-01</span>
+                <span><i class="fas fa-circle" style="color:#10b981; font-size:0.5rem;"></i> connected</span>
+              </div>
+              <div id="terminalBody" class="terminal-body">
+                <!-- Terminal log lines inserted via JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Assessment & Scorecard Portal (Day 11/12 Evaluator) -->
+        <section class="col-5 card-panel">
+          <div class="card-panel-header">
+            <span class="card-title">
+              <i class="fas fa-award" style="color: var(--accent-emerald);"></i>
+              Assessment &amp; Evaluation Portal (100-Mark Rubric)
+            </span>
+            <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); border-color:rgba(16,185,129,0.3);">
+              Official Rubric
+            </span>
+          </div>
+          <div class="card-panel-body">
+            <table class="scorecard-table">
+              <thead>
+                <tr>
+                  <th>Criteria</th>
+                  <th>Max</th>
+                  <th>Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Problem Understanding &amp; Business Value</td>
+                  <td>10</td>
+                  <td><input type="number" id="scorePU" class="scorecard-input" min="0" max="10" value="9"></td>
+                </tr>
+                <tr>
+                  <td>Data Pipeline &amp; EDA</td>
+                  <td>15</td>
+                  <td><input type="number" id="scoreDP" class="scorecard-input" min="0" max="15" value="14"></td>
+                </tr>
+                <tr>
+                  <td>Model / AI-GenAI Layer</td>
+                  <td>20</td>
+                  <td><input type="number" id="scoreML" class="scorecard-input" min="0" max="20" value="18"></td>
+                </tr>
+                <tr>
+                  <td>Application Layer (Streamlit/FastAPI)</td>
+                  <td>15</td>
+                  <td><input type="number" id="scoreAL" class="scorecard-input" min="0" max="15" value="13"></td>
+                </tr>
+                <tr>
+                  <td>GitHub Repository &amp; Documentation</td>
+                  <td>10</td>
+                  <td><input type="number" id="scoreGH" class="scorecard-input" min="0" max="10" value="9"></td>
+                </tr>
+                <tr>
+                  <td>Presentation &amp; Demo</td>
+                  <td>10</td>
+                  <td><input type="number" id="scorePD" class="scorecard-input" min="0" max="10" value="9"></td>
+                </tr>
+                <tr style="background: rgba(0, 229, 255, 0.04);">
+                  <td><strong>Team Subtotal</strong></td>
+                  <td><strong>80</strong></td>
+                  <td><strong id="teamSubtotalScore" style="color:var(--accent-cyan);">72 / 80</strong></td>
+                </tr>
+                <tr>
+                  <td>Individual Viva / Contribution</td>
+                  <td>20</td>
+                  <td><input type="number" id="scoreVA" class="scorecard-input" min="0" max="20" value="17"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="total-score-summary">
+              <div>
+                <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Grand Total Evaluation</div>
+                <div id="grandTotalScore" style="font-family:var(--font-mono); font-size:1.5rem; font-weight:800; color:#fff;">89 / 100</div>
+                <div style="font-size:0.7rem; color:var(--accent-emerald);"><i class="fas fa-check"></i> Passed &bull; Placement Certified</div>
+              </div>
+              <div id="calculatedGradeBadge" class="grade-badge-circle">
+                A
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ====================================================================
+           DAY 12 PRESENTATION & STUDIO HUB (DEFENSE & PITCH)
+           ==================================================================== -->
+      <div id="day12PanelsContainer" class="module-grid-layout" style="display:none;">
+        
+        <!-- Dry Run Studio (Webcam + Speech AI Pacing) -->
+        <section class="col-7 card-panel">
+          <div class="card-panel-header">
+            <span class="card-title">
+              <i class="fas fa-microphone-alt" style="color: var(--accent-cyan);"></i>
+              Dry Run Studio: Camera Recorder &amp; Speech AI Pacing
+            </span>
+            <div class="card-actions">
+              <button id="btnToggleShareScreen" class="icon-btn" onclick="toggleScreenShare()" title="Toggle Screen Share for Demo Walkthrough">
+                <i class="fas fa-desktop"></i> Screen Share
+              </button>
+              <button id="btnToggleRecord" class="btn-portfolio-launch" style="padding:0.35rem 0.85rem; font-size:0.75rem;">
+                <i class="fas fa-video"></i> Start Dry Run Pitch Recording
+              </button>
+            </div>
+          </div>
+          <div class="card-panel-body" style="display:flex; flex-direction:column; gap:1rem;">
+            <!-- Camera / Video Feed Box -->
+            <div class="camera-preview-box">
+              <video id="cameraStream" autoplay playsinline muted style="display:none;"></video>
+              <video id="screenShareStream" autoplay playsinline muted style="display:none;"></video>
+              <div id="camPlaceholder" class="camera-placeholder">
+                <i class="fas fa-video-slash" style="font-size:2rem; color:#475569;"></i>
+                <div style="font-weight:700; color:#fff;">Camera Ready for Pitch Recording</div>
+                <div style="font-size:0.75rem; color:#94a3b8;">Click "Start Dry Run Pitch Recording" to engage WebRTC Camera or "Screen Share" for slides</div>
+              </div>
+            </div>
+
+            <!-- Speech AI Analyzer -->
+            <div class="speech-ai-meter-box">
+              <div class="wpm-gauge-row">
+                <div>
+                  <span style="font-size:0.72rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Cadence &amp; Pacing</span>
+                  <div style="font-size:0.75rem; color:var(--text-muted);">Target: 130–150 WPM (Professional standard)</div>
+                </div>
+                <div id="speechWpmVal" class="wpm-value">138 WPM</div>
+              </div>
+
+              <div>
+                <div style="font-size:0.72rem; color:var(--text-dim); text-transform:uppercase; font-weight:700; margin-bottom:0.4rem;">
+                  Filler Word Monitor
+                </div>
+                <div class="filler-words-list">
+                  <span id="fillerUmBadge" class="filler-badge">"Um": 0</span>
+                  <span id="fillerUhBadge" class="filler-badge">"Uh": 0</span>
+                  <span id="fillerBasicallyBadge" class="filler-badge">"Basically": 0</span>
+                  <span id="fillerLikeBadge" class="filler-badge">"Like": 0</span>
+                  <span id="clarityScoreBadge" class="filler-badge" style="background:rgba(16,185,129,0.15); color:#6ee7b7; border-color:rgba(16,185,129,0.3);">
+                    Clarity Score: 96%
+                  </span>
+                </div>
+              </div>
+
+              <!-- Live Speech Transcript Box -->
+              <div>
+                <div style="font-size:0.72rem; color:var(--text-dim); text-transform:uppercase; font-weight:700; margin-bottom:0.3rem;">
+                  Live Speech Recognition Feed
+                </div>
+                <div id="liveSpeechTranscript" class="live-speech-box">
+                  Ready. Click recording or speak to evaluate speech cadence in real time...
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pitch Deck Navigator (6-Slide Executive Structure) -->
+        <section class="col-5 card-panel">
+          <div class="card-panel-header">
+            <span class="card-title">
+              <i class="fas fa-images" style="color: var(--accent-amber);"></i>
+              6-Minute Technical Pitch Deck
+            </span>
+            <div class="card-actions">
+              <span id="slideTimerBadge" class="badge-tag" style="background:rgba(245,158,11,0.15); color:var(--accent-amber); border-color:rgba(245,158,11,0.3);">
+                <i class="fas fa-stopwatch"></i> <span id="slideTimerSec">60</span>s
+              </span>
+              <button class="icon-btn" id="btnSlideTimer" onclick="toggleSlideTimer()" title="Pause/Resume 60s Slide Timer">
+                <i class="fas fa-play"></i>
+              </button>
+              <span class="badge-tag">STAR Framework</span>
+            </div>
+          </div>
+          <div class="card-panel-body">
+            <div class="pitch-deck-box">
+              <div class="slide-content-preview">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.3rem;">
+                  <span id="pitchSlideNumPill" class="slide-num-pill">Slide 1 of 6</span>
+                  <span id="pitchSlideCountdown" style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-amber);">00:60</span>
+                </div>
+                <div class="slide-timer-progress-bar">
+                  <div id="slideTimerProgress" class="slide-timer-progress-fill" style="width:100%;"></div>
+                </div>
+                <div id="pitchSlideTitle" class="slide-title-text">Executive Problem &amp; Business Value</div>
+                <ul id="pitchSlideBullets" class="slide-bullet-points">
+                  <li>Industry context &amp; pain point</li>
+                  <li>Quantified financial/operational loss</li>
+                  <li>Proposed solution scope</li>
+                </ul>
+                <div id="pitchSpeakerNotes" class="pitch-speaker-notes">
+                  <strong><i class="fas fa-comment-dots"></i> Speaker Cue:</strong> <span id="pitchSpeakerNotesText">Open with the enterprise pain point. Quantify financial loss within first 15 seconds.</span>
+                </div>
+              </div>
+              <div class="deck-nav-bar">
+                <button class="icon-btn" onclick="prevPitchSlide()">
+                  <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <span style="font-size:0.72rem; color:var(--text-muted);">Timed: Exactly 60s per slide</span>
+                <button class="icon-btn" onclick="nextPitchSlide()">
+                  Next <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Technical Question Bank Accordion -->
+            <div style="margin-top:1rem;">
+              <div style="font-size:0.75rem; font-weight:700; color:#fff; margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+                <span>Mock Technical Interview Drilling</span>
+                <button class="icon-btn" onclick="nextJuryQuestion()" style="font-size:0.7rem; color:var(--accent-cyan);">
+                  <i class="fas fa-random"></i> Next Question
+                </button>
+              </div>
+              <div id="juryQuestionCard" style="background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:8px; padding:0.75rem; font-size:0.78rem;">
+                <div id="juryQuestionText" style="color:var(--accent-amber); font-weight:700;">Q: "How did you resolve the trade-off between model accuracy and inference latency?"</div>
+                <div id="juryGuidanceText" style="color:var(--text-muted); margin-top:0.35rem; font-size:0.74rem;">
+                  <strong>Guidance:</strong> Quantify the exact millisecond gain (e.g. 45ms) and why pruning/caching retained 98% accuracy while slashing latency by 60%.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Live Defense Panel & Video Conferencing Grid -->
+        <section class="col-7 card-panel">
+          <div class="card-panel-header">
+            <span class="card-title">
+              <i class="fas fa-users" style="color: var(--accent-emerald);"></i>
+              Live Defense Panel Room (Jury Evaluation &amp; Stream)
+            </span>
+            <div class="card-actions">
+              <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); border-color:rgba(16,185,129,0.3);">
+                <i class="fas fa-signal"></i> Encrypted Jury Stream Active
+              </span>
+            </div>
+          </div>
+          <div class="card-panel-body" style="display:flex; flex-direction:column; gap:1.25rem;">
+            <!-- Video Grid -->
+            <div class="panel-conferencing-grid">
+              <div class="panelist-card speaking">
+                <div class="panelist-avatar-bg"><i class="fas fa-user-tie"></i></div>
+                <div class="panelist-label-tag">
+                  <span>Prof. Anjit Raja R (Academic Lead)</span>
+                  <i class="fas fa-microphone" style="color:var(--accent-emerald);"></i>
+                </div>
+              </div>
+              <div class="panelist-card">
+                <div class="panelist-avatar-bg"><i class="fas fa-briefcase"></i></div>
+                <div class="panelist-label-tag">
+                  <span>Industry VP of AI &amp; Reviewer</span>
+                  <i class="fas fa-microphone-slash" style="color:var(--text-dim);"></i>
+                </div>
+              </div>
+              <div class="panelist-card">
+                <div class="panelist-avatar-bg"><i class="fas fa-laptop-code"></i></div>
+                <div class="panelist-label-tag">
+                  <span>Presenting Student Lead (Live Screen)</span>
+                  <i class="fas fa-desktop" style="color:var(--accent-cyan);"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rubric Quick Scoring Trigger -->
+            <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-secondary); padding:0.85rem 1.25rem; border-radius:8px; border:1px solid var(--border-subtle);">
+              <div>
+                <div style="font-weight:700; color:#fff; font-size:0.85rem;">Defense Panel Status: Ready to Sign-off</div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">All 15 Teams scored on 80-pt Capstone + 20-pt Individual Viva.</div>
+              </div>
+              <button class="btn-portfolio-launch" onclick="openPortfolioModal()">
+                <i class="fas fa-award"></i> Publish Portfolio
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Day 12 Defense Rubric & Grade Certification Panel -->
+        <section class="col-5 card-panel">
+          <div class="card-panel-header">
+            <span class="card-title">
+              <i class="fas fa-award" style="color: var(--accent-emerald);"></i>
+              Jury Scorecard &amp; Placement Audit (100 Marks)
+            </span>
+            <span class="badge-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); border-color:rgba(16,185,129,0.3);">
+              Final Defense
+            </span>
+          </div>
+          <div class="card-panel-body">
+            <table class="scorecard-table">
+              <thead>
+                <tr>
+                  <th>Defense Criteria</th>
+                  <th>Max</th>
+                  <th>Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Problem Understanding &amp; Value</td>
+                  <td>10</td>
+                  <td><input type="number" id="scorePU_d12" class="scorecard-input" min="0" max="10" value="9"></td>
+                </tr>
+                <tr>
+                  <td>Data Pipeline &amp; EDA Cleanliness</td>
+                  <td>15</td>
+                  <td><input type="number" id="scoreDP_d12" class="scorecard-input" min="0" max="15" value="14"></td>
+                </tr>
+                <tr>
+                  <td>AI / Model Inference &amp; Serving</td>
+                  <td>20</td>
+                  <td><input type="number" id="scoreML_d12" class="scorecard-input" min="0" max="20" value="18"></td>
+                </tr>
+                <tr>
+                  <td>Application UI / API SLA (&lt;50ms)</td>
+                  <td>15</td>
+                  <td><input type="number" id="scoreAL_d12" class="scorecard-input" min="0" max="15" value="13"></td>
+                </tr>
+                <tr>
+                  <td>GitHub Cleanliness &amp; CI/CD</td>
+                  <td>10</td>
+                  <td><input type="number" id="scoreGH_d12" class="scorecard-input" min="0" max="10" value="9"></td>
+                </tr>
+                <tr>
+                  <td>Presentation, Pacing &amp; Demo</td>
+                  <td>10</td>
+                  <td><input type="number" id="scorePD_d12" class="scorecard-input" min="0" max="10" value="9"></td>
+                </tr>
+                <tr style="background: rgba(0, 229, 255, 0.04);">
+                  <td><strong>Team Defense Subtotal</strong></td>
+                  <td><strong>80</strong></td>
+                  <td><strong id="teamSubtotalScore_d12" style="color:var(--accent-cyan);">72 / 80</strong></td>
+                </tr>
+                <tr>
+                  <td>Individual Boardroom Viva Q&amp;A</td>
+                  <td>20</td>
+                  <td><input type="number" id="scoreVA_d12" class="scorecard-input" min="0" max="20" value="18"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="total-score-summary">
+              <div>
+                <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Grand Total Evaluation</div>
+                <div id="grandTotalScore_d12" style="font-family:var(--font-mono); font-size:1.5rem; font-weight:800; color:#fff;">90 / 100</div>
+                <div style="font-size:0.7rem; color:var(--accent-emerald);"><i class="fas fa-check"></i> Passed &bull; Placement Certified</div>
+              </div>
+              <div id="calculatedGradeBadge_d12" class="grade-badge-circle">
+                A+
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ========================================================================
+       3. PORTFOLIO PREVIEW & EXPORT CELEBRATION MODAL
+       ======================================================================== -->
+  <div id="portfolioModal" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:0.65rem;">
+          <i class="fas fa-graduation-cap" style="color:var(--accent-cyan); font-size:1.3rem;"></i>
+          <div>
+            <h3 style="font-size:1.1rem; font-weight:800; color:#fff;">Production Portfolio Launchpad</h3>
+            <span style="font-size:0.72rem; color:var(--text-muted);">Career Placement Ready &bull; Saratha University Series</span>
+          </div>
+        </div>
+        <button class="icon-btn" onclick="closePortfolioModal()" style="font-size:1rem;">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="portfolio-export-card">
+          <div class="portfolio-hero">
+            <div>
+              <span id="modalProjectDomain" class="badge-tag" style="background:rgba(0,229,255,0.15); color:var(--accent-cyan); border-color:rgba(0,229,255,0.3);">
+                RETAIL PLACEMENT PORTFOLIO
+              </span>
+              <h3 id="modalProjectTitle" style="margin-top:0.4rem;">Retail Demand Forecasting Dashboard</h3>
+              <p style="color:var(--text-muted); font-size:0.8rem; margin-top:0.2rem;">
+                Engineers: <strong id="modalTeamMembers" style="color:#fff;">A. Karthik, B. Divya, C. Naveen, D. Priyanka</strong>
+              </p>
+              <p style="color:var(--text-muted); font-size:0.75rem;">
+                Faculty Mentor: <strong id="modalMentorName" style="color:var(--accent-amber);">Prof. Anjit Raja R</strong>
+              </p>
+            </div>
+            <div class="portfolio-grade-badge">
+              <i class="fas fa-star"></i> GRADE A+ (92/100)
+            </div>
+          </div>
+
+          <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:0.85rem;">
+            <div style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:0.4rem;">
+              Production Tech Stack &amp; Validations
+            </div>
+            <div id="modalTechStackTags" class="team-stack-tags">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <div class="portfolio-links-grid">
+            <a href="https://github.com" target="_blank" class="portfolio-link-btn">
+              <i class="fab fa-github" style="font-size:1.1rem;"></i> Production GitHub Repo
+            </a>
+            <a href="#" target="_blank" class="portfolio-link-btn">
+              <i class="fas fa-external-link-alt" style="color:var(--accent-cyan);"></i> Live Streamlit Demo
+            </a>
+            <a href="#" target="_blank" class="portfolio-link-btn">
+              <i class="fas fa-file-pdf" style="color:var(--accent-rose);"></i> Executive Scorecard PDF
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="icon-btn" onclick="closePortfolioModal()">Close</button>
+        <button class="btn-portfolio-launch" onclick="downloadPortfolioPage()">
+          <i class="fas fa-download"></i> Download Standalone Portfolio HTML
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Portal Script Engine -->
+  <script src="capstone_portal.js"></script>
+</body>
+</html>

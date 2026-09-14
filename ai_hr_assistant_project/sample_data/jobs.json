@@ -1,0 +1,38 @@
+[
+  {
+    "id": "job_ds",
+    "title": "Data Scientist",
+    "department": "Analytics & AI",
+    "min_experience_years": 2.0,
+    "required_skills": ["Python", "SQL", "Machine Learning", "Pandas", "Scikit-learn", "Statistics"],
+    "nice_to_have_skills": ["Power BI", "PyTorch", "Docker"],
+    "description": "Seeking an analytical Data Scientist to design predictive models, extract insights from structured databases, and build scalable automated inference pipelines."
+  },
+  {
+    "id": "job_ai_llm",
+    "title": "AI & LLM Engineer",
+    "department": "Generative AI Labs",
+    "min_experience_years": 3.0,
+    "required_skills": ["Python", "Transformers", "LLMs", "LangChain", "RAG", "PyTorch"],
+    "nice_to_have_skills": ["FastAPI", "Vector DB", "Docker", "SQL"],
+    "description": "Looking for a seasoned LLM Engineer to build production RAG systems, implement guardrails against hallucinations, and optimize context window budgets."
+  },
+  {
+    "id": "job_devops",
+    "title": "Cloud DevOps Engineer",
+    "department": "Platform & Infrastructure",
+    "min_experience_years": 3.0,
+    "required_skills": ["Docker", "Kubernetes", "AWS", "CI/CD", "Terraform", "Linux"],
+    "nice_to_have_skills": ["Python", "Prometheus", "GitOps", "MySQL"],
+    "description": "Join our infrastructure engineering team to maintain resilient Kubernetes clusters, automate multi-region cloud provisioning, and enforce zero-trust security."
+  },
+  {
+    "id": "job_fullstack",
+    "title": "Full Stack Web Developer",
+    "department": "Product Engineering",
+    "min_experience_years": 2.0,
+    "required_skills": ["JavaScript", "React", "Node.js", "HTML/CSS", "SQL"],
+    "nice_to_have_skills": ["TypeScript", "Tailwind", "Docker", "FastAPI"],
+    "description": "We are seeking a versatile Full Stack Developer to build performant web applications, responsive user interfaces, and robust backend REST microservices."
+  }
+]

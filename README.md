@@ -22,6 +22,8 @@ To launch the training portal:
 
 | File | Description |
 | :--- | :--- |
+| [**`capstone_portal.html`**](file:///e:/Training_out/Saratha%20University%201.0/Saratha_Presentation%20DAYs%201.0/SARATHA_PPTs_D/Day-09/TRaining_PE01/capstone_portal.html) | **Capstone Portal (Day 11 & Day 12)**: Career launchpad with real-time 5-hour sprint clock, Mermaid architecture renderer, embedded IDE & REST tester, Dry Run AI pitch studio, live jury evaluation scorecard, and portfolio exporter. |
+| [**`ai_hr_assistant_project/`**](file:///e:/Training_out/Saratha%20University%201.0/Saratha_Presentation%20DAYs%201.0/SARATHA_PPTs_D/Day-09/TRaining_PE01/ai_hr_assistant_project) | **Complete Production Sample Project**: Full end-to-end AI HR Assistant with FastAPI microservice, Pydantic schemas, deterministic + few-shot LLM matching engine, interactive web console, CLI tool, and 100% passing pytest suite. |
 | [**`index.html`**](file:///e:/Training_out/Saratha%20University%201.0/Saratha_Presentation%20DAYs%201.0/SARATHA_PPTs_D/Day-09/TRaining_PE01/index.html) | Complete interactive training portal with live simulators, tokenizers, rubric evaluation, dark/light mode, and global search. |
 | [**`handbook.html`**](file:///e:/Training_out/Saratha%20University%201.0/Saratha_Presentation%20DAYs%201.0/SARATHA_PPTs_D/Day-09/TRaining_PE01/handbook.html) | Publication-ready standalone printable A4 PDF course handbook with table of contents, cover page, and full 70-section course text. |
 | [**`styles.css`**](file:///e:/Training_out/Saratha%20University%201.0/Saratha_Presentation%20DAYs%201.0/SARATHA_PPTs_D/Day-09/TRaining_PE01/styles.css) | Custom styling, glassmorphism, responsive adjustments, token pill animations, and print/export stylesheet. |
@@ -53,3 +55,27 @@ Switch between 6 realistic candidate profiles and 4 target job descriptions with
 * Styled with print-optimized CSS (`@page { size: A4; margin: 15mm; }`, page-breaks, avoid-break blocks).
 * Formatted cover sheet, table of contents, diagrams, code listings, and 20-mark evaluation rubric.
 * One-click "Print / Save as PDF" button.
+
+---
+
+### 🚀 Capstone Career Launchpad (Day 11 & Day 12)
+
+The companion [**`capstone_portal.html`**](file:///e:/Training_out/Saratha%20University%201.0/Saratha_Presentation%20DAYs%201.0/SARATHA_PPTs_D/Day-09/TRaining_PE01/capstone_portal.html) accelerates student placement preparation with 15 production-ready enterprise project simulations:
+
+1. **15 Bespoke Industry Capstone Projects**:
+   * Complete student rosters from Saratha University Phase IV engineering batches.
+   * Tailored across 15 high-growth sectors: Retail, HR Attrition, Credit Risk Underwriting, EdTech Adaptive Learning, AgriTech Disease Classification, GenAI Customer RAG, Clinical Healthcare, E-Commerce Personalization, Industrial Predictive Maintenance, Equity Research Copilot, Insurance Claim Fraud, Fleet Route Optimization, Geospatial Real Estate, Smart Grid Energy, and Statutory LegalTech.
+2. **Dynamic Multi-Tab Developer Workspace**:
+   * Switching teams dynamically swaps domain-specific source code in the IDE: `main.py` (FastAPI serving layer), `pipeline.py` (ETL/ML transform), `schema.sql` (PostgreSQL 16 audit tables), `docker-compose.yml`, and `test_capstone.py`.
+   * Live REST Endpoint Tester with sub-50ms simulated latency responses.
+3. **Dry Run AI Speech & Screen Share Studio (Day 12)**:
+   * WebRTC camera recording and **live screen sharing** to rehearse presenting actual Streamlit and Power BI dashboards.
+   * Real-time **Web Speech API** integration tracking speech cadence (target 130–150 WPM) and detecting filler words (*"um"*, *"uh"*, *"basically"*, *"like"*).
+   * **60-Second Slide Countdown Timer** with animated progress bars and speaker cue prompts enforcing strict 6-minute pitch discipline.
+4. **Mock Jury Technical Defense Drilling**:
+   * Interactive question bank training students on high-stakes interview defense (trade-offs, latency vs accuracy SLAs, model drift, data privacy).
+5. **Synchronized 100-Mark Rubric Scorecards**:
+   * Day 11 Build and Day 12 Defense jury scorecards sync bidirectionally (80-pt team milestones + 20-pt individual viva).
+6. **Publication-Grade Standalone Portfolio HTML Exporter**:
+   * One-click download generates an executive, responsive dark-mode portfolio single-page application with verification seal, API specs, and faculty mentor sign-off.
+

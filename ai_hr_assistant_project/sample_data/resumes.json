@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cand_01",
+    "name": "Rahul Kumar",
+    "title": "Data Analyst",
+    "education": "B.Tech Computer Science, Anna University (2022)",
+    "experience_years": 2.0,
+    "skills": ["Python", "SQL", "Pandas", "NumPy", "Scikit-learn", "Machine Learning", "Power BI", "Git"],
+    "summary": "Data Analyst with 2 years of experience building predictive sales models and interactive Power BI dashboards. Proficient in SQL querying, feature extraction, and regression algorithms.",
+    "raw_resume": "Rahul Kumar\nB.Tech Computer Science\nSkills: Python, SQL, Pandas, NumPy, Scikit-learn, Machine Learning, Power BI, Git\nExperience: 2 years as Data Analyst at RetailMetrics Inc. Built customer churn forecaster and automated ETL."
+  },
+  {
+    "id": "cand_02",
+    "name": "Priya Sharma",
+    "title": "Junior Data Analyst",
+    "education": "MCA, Master of Computer Applications (2023)",
+    "experience_years": 1.5,
+    "skills": ["Python", "SQL", "Excel", "Pandas", "Power BI", "Machine Learning"],
+    "summary": "Junior Data Analyst with 1.5 years of experience in data cleansing, EDA, and statistical reporting using Excel and Pandas.",
+    "raw_resume": "Priya Sharma\nMCA\nSkills: Python, SQL, Excel, Pandas, Power BI, Machine Learning\nExperience: 1.5 years as Junior Data Analyst at FinCorp. Automated monthly reconciliation reports."
+  },
+  {
+    "id": "cand_03",
+    "name": "Arun Kumar",
+    "title": "Cloud Infrastructure & DevOps Engineer",
+    "education": "B.Tech Information Technology (2020)",
+    "experience_years": 4.0,
+    "skills": ["Python", "Docker", "Kubernetes", "AWS", "Terraform", "Linux", "Git", "MySQL", "CI/CD"],
+    "summary": "DevOps Engineer with 4 years designing containerized microservice architectures, Terraform infrastructure as code, and automated CI/CD pipelines.",
+    "raw_resume": "Arun Kumar\nB.Tech Information Technology\nSkills: Python, Docker, Kubernetes, AWS, Terraform, Linux, Git, MySQL, CI/CD\nExperience: 4 years as Cloud Infrastructure Engineer at CloudScale Ops. Architected EKS clusters and zero-downtime deployment pipelines."
+  },
+  {
+    "id": "cand_04",
+    "name": "Sneha Patel",
+    "title": "Full Stack Web Developer",
+    "education": "B.E. Computer Engineering (2022)",
+    "experience_years": 2.0,
+    "skills": ["JavaScript", "TypeScript", "React", "Node.js", "HTML/CSS", "Tailwind", "SQL", "Git"],
+    "summary": "Full Stack Developer with 2 years building responsive React frontends and Node.js REST APIs with relational database backends.",
+    "raw_resume": "Sneha Patel\nB.E. Computer Engineering\nSkills: JavaScript, TypeScript, React, Node.js, HTML/CSS, Tailwind, SQL, Git\nExperience: 2 years as Full Stack Web Developer at WebCraft Studio. Built client portals and optimized frontend load speeds."
+  },
+  {
+    "id": "cand_05",
+    "name": "Vikram Verma",
+    "title": "Lead AI & LLM Engineer",
+    "education": "M.Tech Artificial Intelligence, IIT Madras (2019)",
+    "experience_years": 5.0,
+    "skills": ["Python", "PyTorch", "Transformers", "LLMs", "LangChain", "RAG", "Machine Learning", "Statistics", "SQL", "Pandas", "FastAPI"],
+    "summary": "Senior AI Engineer with 5 years specializing in deep learning, Transformer architectures, RAG pipelines, and high-throughput LLM serving microservices.",
+    "raw_resume": "Vikram Verma\nM.Tech Artificial Intelligence\nSkills: Python, PyTorch, Transformers, LLMs, LangChain, RAG, Machine Learning, Statistics, SQL, Pandas, FastAPI\nExperience: 5 years leading AI/ML initiatives at DeepCognition Labs. Deployed enterprise RAG search reducing latency by 45%."
+  },
+  {
+    "id": "cand_06",
+    "name": "Neha Rao",
+    "title": "Computer Science Fresher",
+    "education": "B.Tech Computer Science, Saratha University (2024)",
+    "experience_years": 0.0,
+    "skills": ["Python", "Machine Learning", "C++", "SQL", "Git", "Algorithms"],
+    "summary": "Recent CS graduate with strong foundational algorithmic problem solving and hands-on academic capstone project in computer vision.",
+    "raw_resume": "Neha Rao\nB.Tech Computer Science (Recent Graduate)\nSkills: Python, Machine Learning, C++, SQL, Git, Algorithms\nExperience: 0 years (Fresh Graduate). Academic capstone on Real-time Traffic Sign Classification using CNNs."
+  }
+]

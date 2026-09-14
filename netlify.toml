@@ -18,3 +18,20 @@
   for = "/*.css"
   [headers.values]
     Content-Type = "text/css; charset=utf-8"
+
+# URL Redirects for Clean Navigation
+[[redirects]]
+  from = "/capstone"
+  to = "/capstone_portal.html"
+  status = 200
+
+[[redirects]]
+  from = "/portal"
+  to = "/capstone_portal.html"
+  status = 200
+
+[[redirects]]
+  from = "/handbook"
+  to = "/handbook.html"
+  status = 200
+
